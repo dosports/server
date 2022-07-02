@@ -1,0 +1,242 @@
+@import url("/css/variables.css");
+.flex_row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+/* 헤더 */
+header {
+	height: 10rem;
+}
+#header-logo {
+	height: 4rem;
+	margin-left: 5rem;
+}
+#header-logo > img {
+	height: 100%;
+}
+#header-search_bar {
+	width: 50rem;
+	height: 4rem;
+}
+#header-search_bar > form {
+	height: 100%;
+	border: 0.1rem solid gray;
+	border-radius: 1rem;
+	padding: 0.5rem 1rem;
+}
+#header-search_bar > form > input {
+	width: 100%;
+	height: 100%;
+}
+#header-search_btn {
+	width: 2rem;
+}
+#header-right {
+	margin-right: 5rem;
+	padding: 1rem;
+}
+.header-right-text {
+	padding: 0 1rem;
+	margin: 1rem 0;
+	font-size: 1.2rem;
+}
+.divider {
+	border-right: 0.1rem solid gray;
+}
+
+/*네비게이션*/
+#nav_bar {
+	height: 5rem;
+	background: var(--sub1);
+	/* background: white; */
+}
+#nav_bar > div:first-child {
+	margin-left: 15rem;
+}
+#nav_bar > div:last-child {
+	margin-right: 15rem;
+}
+#nav-menu_btn {
+	width: 2rem;
+	height: 2rem;
+	display: block;
+	margin: auto;
+}
+.nav-menu-item {
+	width: 100%;
+	height: 100%;
+}
+.nav-menu-item > div {
+	height: 100%;
+}
+.nav-menu-text {
+	width: fit-content;
+	line-height: 5rem;
+	margin: auto;
+	font-size: 1.5rem;
+}
+.nav-menu-item:hover {
+	transition: 0.3s;
+	background: var(--sub2);
+}
+#nav_bar_categorys {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: fit-content;
+	padding: 4rem 15rem;
+	background: white;
+	z-index: 1;
+	opacity: 1;
+}
+#nav_bar_categorys > div {
+	width: 100%;
+	height: 100%;
+	justify-content: start;
+	align-items: flex-start;
+}
+.nav_bar_category {
+	padding-right: 10rem;
+}
+.category-detail {
+	padding: 2rem 0 0 0;
+}
+.category_name {
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+.detail_item {
+	width: fit-content;
+	font-size: 1.3rem;
+	padding-bottom: 0.5rem;
+	margin-bottom: 1rem;
+}
+.detail_item:hover {
+	border-bottom: 1px solid black;
+}
+/*내용*/
+.banner_title {
+	font-size: 2rem;
+	font-weight: 600;
+	padding-bottom: 4rem;
+}
+.recommend-item-text,
+.best-item-text {
+	width: 10rem;
+	padding: 1rem;
+	font-size: 1.4rem;
+	font-weight: 400;
+}
+/*광고*/
+#ad {
+	position: relative;
+	height: 60rem;
+	background: black;
+	transition: 3s;
+}
+#ad > img {
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
+}
+#ad-page {
+	position: absolute;
+	left: calc(50% - 5rem / 2);
+	bottom: 3rem;
+}
+.npage {
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	border: 1px solid white;
+	margin-right: 1rem;
+}
+/*추천*/
+#recommend {
+	height: fit-content;
+	box-sizing: content-box;
+	margin: 10rem 15rem;
+}
+#recommend-next_btn {
+	position: absolute;
+	top: 16rem;
+	right: 1rem;
+}
+#recommend-prev_btn {
+	position: absolute;
+	top: 16rem;
+	left: 1rem;
+}
+#recommend-list button {
+	display: none;
+	background: rgba(255, 255, 255, 0.5);
+	border-radius: 50%;
+	padding: 0.5rem;
+}
+#recommend-list button > img {
+	width: 2rem;
+}
+#recommend-list {
+	position: relative;
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: repeat(auto-fill, 35rem);
+	column-gap: 3rem;
+	overflow: hidden;
+}
+.recommend-item {
+	width: 35rem;
+}
+.recommend-item > img {
+	width: 100%;
+	height: inherit;
+	transition: 0.3s;
+}
+#recommend-list:hover > button {
+	display: block;
+}
+.recommend-item:hover > img {
+	box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
+}
+/*베스트 상품*/
+#best {
+	margin: 0 15rem 15rem 15rem;
+}
+#best-menu {
+	justify-content: center;
+}
+.best-menu-text {
+	width: fit-content;
+	font-size: 1.4rem;
+	padding: 1rem 0;
+	margin: 1rem 2rem 1rem 0;
+	color: gray;
+}
+#best-list {
+	display: grid;
+	grid-template-rows: repeat(auto-fill, auto);
+	grid-template-columns: 1fr 1fr 1fr;
+	row-gap: 6rem;
+	column-gap: 3rem;
+	justify-items: center;
+	margin: 4rem auto;
+}
+.best-item > img {
+	width: 35rem;
+	height: 35rem;
+	transition: 0.3s;
+}
+.best-menu-text:hover {
+	border-bottom: 1px solid black;
+	color: black;
+}
+.best-item:hover > img {
+	box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
+}
+/*footer*/
+footer {
+	height: 45rem;
+	background: white;
+}

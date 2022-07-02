@@ -1,0 +1,420 @@
+* {
+	box-sizing: border-box;
+	font-family: "Roboto", "Noto", sans-serif;
+    font-weight: 400;
+    font-size: 1.7rem;
+    color: var(--text);
+}
+
+
+body {
+    box-sizing: border-box;
+    margin: 4rem 10rem;
+}
+
+/* header */
+
+header {
+    background-color: white;
+    margin-bottom: 3rem;
+    width: 100%;
+}
+
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    justify-self: center;
+    background-color: var(--white);
+    width: 100%;
+}
+
+.hamburger-bar {
+    margin-right: 30.2rem;
+    cursor: pointer;
+}
+
+.hamburger-bar img {
+    width: 3rem;
+    height: 3rem ;
+}
+
+.logo {
+    margin-right: 2rem;
+    text-align: center;
+}
+
+.logo img {
+    width: 19.5rem;
+    height: 4.8rem;
+}
+
+.search button {
+    border:  0;
+    outline: 0;
+    background-color: transparent;
+}
+
+.search {
+    display: flex;
+    width: 25rem;
+    height: 4rem;
+    border : 2px solid var(--border);
+    border-radius: 26.5px;
+
+    right: 0;
+}
+
+.search input {
+    width: 80%;
+    height: 80%;
+    border: 0;
+    background-color: transparent;
+}
+
+.search button img {
+    width : 2.4rem;
+    height: 2.4rem;
+
+}
+
+
+/* info */
+#info {
+    width: 100%;
+    height: 24rem;
+    padding: 2.1rem ;
+
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+}
+
+.info-container {
+    display: flex;
+    width: 80rem;
+    height: 100%;
+    position: absolute;
+    left: 35%;
+}
+
+.item-img {
+    background-color: var(--border);
+    width: 216px;
+    height: 197px;
+
+    margin-right:22px;
+}
+
+.item-info {
+    color: var(--main-blue);
+    display: flex;
+    flex-direction: column;
+}
+
+.item-info span:nth-child(1) {
+    margin-bottom: 0.8rem;
+}
+.item-info span:nth-child(2) {
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+}
+.item-info span:nth-child(2) {
+    font-size: 1.6rem;
+}
+
+/* rate */
+#rating {
+    width: 100%;
+    height: 12rem;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.rating-container {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    left: 50%;
+    margin-left: -40rem ;
+    margin-top: 2rem;
+
+    width: 80rem;
+
+}
+
+.rating-container form {
+    margin-top: 22px;
+    text-align: center;
+}
+
+.star-rating {
+    margin-top: 2rem;
+    display: inline-block;
+    direction: rtl;
+    text-align: center;
+}
+
+#rating div label {
+    margin-right: 7px;
+    color: transparent;
+    font-size: 32px;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+
+.rating-container span {
+    text-align: center;
+}
+
+.star-rating label {
+    cursor : pointer;
+}
+
+.star-rating label:hover {
+    -webkit-text-fill-color: #FFF858;
+}
+.star-rating label:hover ~ label {
+    -webkit-text-fill-color: #FFF858;
+}
+.rating-container input[type=radio]:checked ~ label {
+    -webkit-text-fill-color: #FFF858;
+}
+
+
+/* setting */
+#setting {
+    width: 100%;
+    height: 31.4rem;
+
+    padding: 2.1rem 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.setting-container {
+    width: 135rem;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+#setting .gen_body {
+    display: flex;
+    align-content: space-between;
+    width: 100%;
+}
+
+.gender-box {
+    flex-shrink: 1;
+}
+.body-box {
+    flex-shrink: 2;
+}
+
+
+#setting .gender-box {
+    width: 37vw;
+    z-index: 1000;
+    margin: 0 4rem;
+    padding: 2rem 5rem;
+}
+.gender-box span, .body-box span, .level-box span {
+    font-weight: 700;
+}
+.gender {
+    margin-top: 2rem;
+}
+
+#setting .body-box {
+    width: 60vw;
+    z-index: 1000;
+    padding: 2rem 5rem;
+}
+.body-box div {
+    display: flex;
+    justify-content: space-around;
+}
+
+.height input , .weight input {
+    margin-left : 2rem ;
+    margin-right: 1rem;
+    width: 13rem;
+}
+
+#setting .level {
+    width: 130rem;
+    margin: 0 auto;
+}
+
+#setting .level .level-box {
+    width: 131rem;
+    height: 12rem;
+    padding-top: 2.5rem;
+    margin-top: 2rem ;
+    margin-left: 1.2rem;
+    text-align: center;
+    z-index: 1000;
+}
+.level-box span {
+    margin-bottom: 2rem;
+}
+
+.gender-box , .body-box , .level-box {
+    border-radius: 28px;
+    background-color: var(--border);
+}
+
+.body-box div , .level-box div {
+    margin-top: 1rem;
+}
+
+
+/* review */
+#review {
+    width: 100%;
+    height: 80rem;
+
+}
+
+.review_content {
+    margin-top: 3rem;
+}
+
+.review_content legend {
+    font-weight: 600;
+}
+
+#review .review-box {
+    width : 80rem ;
+    position: absolute;
+    left: 10%;
+    margin-top: 2rem;
+}
+
+
+.review_content textarea {
+    width: 159%;
+    height: 60rem;
+
+    padding: 4rem;
+
+    margin-top: 2rem;
+    border-radius: 28px;
+}
+
+.review_content textarea::placeholder {
+    color: var(--border);
+}
+
+.review_pic {
+    margin-top: 5rem;
+
+    width: 159%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.review_pic .pic {
+    width: 24rem;
+    height: 12rem;
+    background-color: var(--border);
+}
+
+/* sub */
+#sub{
+    width: 100%;
+    height: 30rem;
+    margin-top: 10rem;
+}
+
+#sub .sub-container {
+    width : 37rem;
+    margin: 0 auto;
+    height: 20rem;
+}
+
+.sub-container input:first-child {
+    width: 13rem;
+    height: 9rem;
+    border: 0;
+    border-radius: 19px;
+    background-color: var(--border);
+    margin-right: 2rem;
+}
+.sub-container input:last-child {
+    width: 20rem;
+    height: 9rem;
+    border: 0;
+    border-radius: 19px;
+    background-color: var(--border);
+}
+
+.gender input[type=radio] , .level input[type=radio] {
+    appearance: auto;
+}
+
+.sub-container input {
+    cursor: pointer;
+}
+
+
+/*  menu bar */
+
+#menu-bar {
+    font-size: 22px;
+
+    width: 60rem;
+    height: 100vmax;
+    background-color: var(--white) ;
+    box-shadow: 3px 3px 20px var(--border);
+    z-index: 99999;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#menu-bar ul {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+
+    margin-top: 10rem;
+}
+
+#menu-bar ul li {
+    width: 14rem;
+    height: 6rem;
+}
+
+#menu-bar span {
+    display: inline-block;
+    width: 15rem;
+    font-weight: 600;
+    border: 2px solid var(--border);
+    padding: 1.4rem;
+}
+
+.cate-sports , .cate-brand {
+    display: flex;
+    flex-direction: column;
+}
+
+.cancel {
+    position: absolute;
+    right: 1rem ;
+    top : 2rem ;
+    cursor: pointer;
+}
+
+.cancel img {
+    width: 3rem;
+    height: 3rem;
+    transform: rotate(45deg);
+}
+
+.hide {
+    display: none;
+}
