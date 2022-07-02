@@ -2,9 +2,145 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyPage</title>
+    <link rel="stylesheet" href="/css/mypage.css">
 </head>
 <body>
-    <h1>Mypage</h1>
+<nav class="flex">
+    <div>
+        <button class="nav-btn">
+            <span id="nav_img">
+                <img id="navbar" height="40" width="30" src="/img/hamburgerBar.png">
+            </span>
+        </button>
+    </div>
+
+    <div>
+        <button>
+                <span id="logo_img">
+                    <a href="/"><img id="logo"  height="40" width="150" src ="/img/logo-test.png"></a>
+                </span>
+        </button>
+    </div>
+
+    <div>
+        <form id="search-form" class="flex" action="http://localhost/ㅁㅣㅈㅓㅇ.php">
+            <input type="text" />
+            <button type="submit">
+                <span id ="search">
+                    <img id="search_img" height="35" width="30" src="/img/glass.png">
+                </span>
+            </button>
+        </form>
+    </div>
+</nav>
+
+<div id="container-box">
+    <div class="flex " id= "user_box">
+        <div class="profile-block flex">
+            <button id="profile-btn">
+                <span>
+                    <img id="profile" src="/img/profile.PNG">
+                </span>
+            </button>
+            <div class ="flex" id ="username">
+                user1
+            </div>
+            <div class="flex" id="profile-block-right">
+                <button id="setting-btn">
+                <span>
+                    <img id="setting"  src="/img/setting.png">
+                </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="block flex">
+        <span>스탬프</span>
+        <div class="block-right">
+            <span>00개</span>
+            <button>
+                <img  height="15" width="15" src="/img/arrow.png">
+            </button>
+        </div>
+    </div>
+    <div class="block flex">
+        <span>찜목록</span>
+        <div class="block-right">
+            <span>00개</span>
+            <button>
+                <img  height="15" width="15" src="/img/arrow.png">
+            </button>
+        </div>
+    </div>
+    <div id="recent-block">
+        <div id="recently" class="flex">
+            <span>최근 본 상품</span>
+            <button>
+                <img  height="15" width="15" src="/img/arrow.png">
+            </button>
+        </div>
+        <div id="recent-img" class="flex">
+            <div class="re-img"><img src="./"></div>
+            <div class="re-img"><img src="./"></div>
+            <div class="re-img"><img src="./"></div>
+            <div class="re-img"><img src="./"></div>
+            <div class="re-img"><img src="./"></div>
+        </div>
+    </div>
+
+
+    <div id="last-block" class ="block">
+        <div id="written-review" class="flex">
+            <span>내가 쓴 리뷰</span>
+            <button>
+                <a href="/user/mypage/Info/1"><img  height="15" width="15" src="/img/arrow.png"></a>
+            </button>
+        </div>
+        <div class="review flex">
+            <div class="re-img"><img src="./"></div>
+            <div class="details">
+                <div class="detail-name">상품명</div>
+                <div class="detail-more">판매처</div>
+                <div class="detail-name">작성날짜</div>
+                <div class="detail-name">작성한 글</div>
+            </div>
+
+            <div id="review-data">
+                <div class="details">
+                    <div class="detail-box"></div>
+                    <div class="detail-more detail-box"></div>
+                    <div class="detail-box"></div>
+                    <div class="detail-box"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="review flex">
+            <div class="re-img"><img src="./"></div>
+            <div class="details">
+                <div class="detail-name">상품명</div>
+                <div class="detail-more">판매처</div>
+                <div class="detail-name">작성날짜</div>
+                <div class="detail-name">작성한 글</div>
+            </div>
+
+            <div id="review-data">
+                <a href="/review/{idx}">
+                    <div class="details">
+                        <div class="detail-box"></div>
+                        <div class="detail-more detail-box"></div>
+                        <div class="detail-box"></div>
+                        <div class="detail-box"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

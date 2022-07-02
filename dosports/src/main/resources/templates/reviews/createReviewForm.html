@@ -2,9 +2,140 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>create review</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리뷰 작성</title>
+
+    <!--css-->
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/writeReview.css">
 </head>
 <body>
-    <h1>create review form</h1>
+<header>
+    <div class="header-container">
+        <div class="hamburger-bar"><img src="/img/hamburgerBar.png" alt=""></div>
+        <div class="logo"><img src="/img/logo-test.png" alt=""></div>
+        <div class="search">
+            <input type="text">
+            <button><img src="./image/glass.png" alt=""></button>
+        </div>
+    </div>
+</header>
+<main>
+    <form action="http://localhost:8080/review" method="get" name="review" id="review-form">
+        <section id="info">
+            <div class="info-container">
+                <div class="item-img"></div>
+                <div class="item-info">
+                    <span>나이키 남자 헬스복 트레이닝 타이즈 쿨컴프레션 상의</span>
+                    <span>나이키</span>
+                    <span>53,900</span>
+                </div>
+            </div>
+        </section>
+        <section id="rating">
+            <div class="rating-container">
+                <span>상품은 어떠셨나요?</span>
+                <fieldset class="star-rating">
+                    <input type="radio" name="star" id="star1"><label for="star1">⭐️</label>
+                    <input type="radio" name="star" id="star2"><label for="star2">⭐️</label>
+                    <input type="radio" name="star" id="star3"><label for="star3">⭐️</label>
+                    <input type="radio" name="star" id="star4"><label for="star4">⭐️</label>
+                    <input type="radio" name="star" id="star5"><label for="star5">⭐️</label>
+                </fieldset>
+            </div>
+        </section>
+        <section id="setting">
+            <div class="setting-container">
+                <div class="gen_body">
+                    <div class="gender-box">
+                        <span>성별</span>
+                        <div class="gender">
+                            <label for="male">남</label><input type="radio" name="gender" id="male">
+                            <label for="female">여</label><input type="radio" name="gender" id="female">
+                        </div>
+                    </div>
+                    <div class="body-box">
+                        <span>체형</span>
+                        <div>
+                            <div class="height">
+                                <label for="">키</label> <input type="number" name="height" id="height">
+                                <span>cm</span>
+                            </div>
+                            <div class="weight">
+                                <label for="">몸무게</label> <input type="number" name="weight" id="weight">
+                                <span>kg</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="level">
+                    <div class="level-box">
+                        <span>운동 수준</span>
+                        <div>
+                            <label for="beginning">초</label><input type="radio" name="level" id="beginning">
+                            <label for="intermediate">중</label><input type="radio" name="level" id="intermediate">
+                            <label for="high">고</label><input type="radio" name="level" id="high">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="review">
+            <div class="review-box">
+                <div class="review_content">
+
+                    <legend>솔직한 리뷰를 남겨주세요</legend>
+                    <textarea name="content" cols="150" rows="15" placeholder="욕설과 비방은 삼가헤주세요." ></textarea>
+
+                </div>
+                <div class="review_pic">
+                    <input type="file" name="img_path" id="review-pic">
+                </div>
+            </div>
+        </section>
+        <section id="sub">
+            <div class="sub-container">
+                <input type="button" value="취소">
+                <input type="submit" value="등록">
+            </div>
+        </section>
+    </form>
+</main>
+
+
+<div id="menu-bar" class="hide">
+    <div class="cancel">
+        <img src="./hackerton-images/plus.png" alt="">
+    </div>
+    <ul>
+        <li >
+            <span>운동별</span>
+            <ul class="cate-sports">
+                <li>헬스복</li>
+                <li>요가/필라테스복</li>
+                <li>테니스복</li>
+                <li>골프복</li>
+                <li>수영복</li>
+            </ul>
+        </li>
+        <li>
+            <span>브랜드별</span>
+            <ul class="cate-brand">
+                <li>나이키</li>
+                <li>아디다스</li>
+            </ul>
+        </li>
+        <li>
+            <span>홈트도구</span>
+        </li>
+    </ul>
+</div>
+
+
+<!--javascript-->
+<script src="/js/writeReview.js"></script>
 </body>
 </html>

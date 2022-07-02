@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>상품 목록</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/reset.css">
@@ -17,128 +17,128 @@
 
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <div class="hamburger-bar"><img src="../writeReview/hackerton-images/hamburgerBar.png" alt=""></div>
-            <div class="logo"><img src="../writeReview/hackerton-images/logo-test.png" alt=""></div>
-            <div class="search">
-                    <input type="text"> 
-                    <button><img src="../writeReview/hackerton-images/glass.png" alt=""></button>
-            </div>
+<header>
+    <div class="header-container">
+        <div class="hamburger-bar"><img src="/img/hamburgerBar.png" alt=""></div>
+        <div class="logo"><img src="/img/logo-test.png" alt=""></div>
+        <div class="search">
+            <input type="text">
+            <button><img src="/img/glass.png" alt=""></button>
         </div>
-    </header>
-    
-    <div class="filter_bg_container hidden">
-        <div class="filter_container hidden">
-            <img src="./Image/plus.png" alt="" class="filter_close">
-            <div class="filter_header">필터</div>
-            <div class="filter_item_container">
-                <div class="filter_item">
-                    <div class="filter_item_header">성별</div>
-                    <div class="filter_gender_box">
-                        <span class="borderTransparent">남</span>
-                        <span class="borderTransparent">여</span>
+    </div>
+</header>
+
+<div class="filter_bg_container hidden">
+    <div class="filter_container hidden">
+        <img src="/img/plus.png" alt="" class="filter_close">
+        <div class="filter_header">필터</div>
+        <div class="filter_item_container">
+            <div class="filter_item">
+                <div class="filter_item_header">성별</div>
+                <div class="filter_gender_box">
+                    <span class="borderTransparent">남</span>
+                    <span class="borderTransparent">여</span>
+                </div>
+            </div>
+            <div class="filter_item">
+                <div class="filter_item_header">체형</div>
+                <div class="physical_container">
+                    <div class="height_box">
+                        <span>키</span>
+                        <input type="text" class="height_input">
+                        <span>cm</span>
+                    </div>
+                    <div class="weight_box">
+                        <span>몸무게</span>
+                        <input type="text" class="weight_input">
+                        <span>kg</span>
                     </div>
                 </div>
-                <div class="filter_item">
-                    <div class="filter_item_header">체형</div>
-                    <div class="physical_container">
-                        <div class="height_box">
-                            <span>키</span>
-                            <input type="text" class="height_input">
-                            <span>cm</span>
-                        </div>
-                        <div class="weight_box">
-                            <span>몸무게</span>
-                            <input type="text" class="weight_input">
-                            <span>kg</span>
-                        </div>
+            </div>
+
+            <div class="filter_item">
+                <div class="filter_item_header">운동 수준</div>
+                <div class="level_detail_container">
+                    <div class="level_box">
+                        <span class="level borderTransparent">초</span>
+                        <span class="level_detail">이제 막 시작했어요</span>
+                    </div>
+                    <div class="level_box">
+                        <span class="level borderTransparent">중</span>
+                        <span class="level_detail">이제 조금 익숙해지고 있어요</span>
+                    </div>
+                    <div class="level_box">
+                        <span class="level borderTransparent">고</span>
+                        <span class="level_detail">이제는 거의 고수에요</span>
                     </div>
                 </div>
-                
-                <div class="filter_item">
-                    <div class="filter_item_header">운동 수준</div>
-                    <div class="level_detail_container">
-                        <div class="level_box">
-                            <span class="level borderTransparent">초</span>
-                            <span class="level_detail">이제 막 시작했어요</span>
-                        </div>
-                        <div class="level_box">
-                            <span class="level borderTransparent">중</span>
-                            <span class="level_detail">이제 조금 익숙해지고 있어요</span>
-                        </div>
-                        <div class="level_box">
-                            <span class="level borderTransparent">고</span>
-                            <span class="level_detail">이제는 거의 고수에요</span>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="filter_item">
-                    <div class="filter_item_header">가격대</div>
-                    <div class="price_container">
-                        <span class="borderTransparent">저가</span>
-                        <span class="borderTransparent">중저가</span>
-                        <span class="borderTransparent">고가</span>
-                    </div>
+
+            </div>
+            <div class="filter_item">
+                <div class="filter_item_header">가격대</div>
+                <div class="price_container">
+                    <span class="borderTransparent">저가</span>
+                    <span class="borderTransparent">중저가</span>
+                    <span class="borderTransparent">고가</span>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <main>
-        <div class="current_page_position">
-            <span>운동별</span>
-            <img src="./Image/arrow.png" alt="" class="current_page_position_arrow">
-            <span>테니스</span>
-        </div>
-    
-        <div class="detail_category">
-            <span class="detail_category_item">상의</span>
-            <span class="detail_category_item">팬츠</span>
-            <span class="detail_category_item">스커트</span>
-            <span class="detail_category_item">운동화</span>
-            <span class="detail_category_item">스포츠용품</span>
-        </div>
-    
-        <div class="sort">
-            <img src="./image/filter.png" alt="" class="sort_filter_icon">
-            <span>추천순</span>
-        </div>
-    
-        <div class="expert_opinion">
-            <div class="expert_opinion_header">
-                <span>전문가 의견 참고하기</span>
-                <img src="./Image/arrow.png" alt="" class="expert_opinion_arrow">
-            </div>
-            <div class="expert_opinion_main">
+<main>
+    <div class="current_page_position">
+        <span>운동별</span>
+        <img src="/img/arrow.png" alt="" class="current_page_position_arrow">
+        <span>테니스</span>
+    </div>
 
-            </div>
+    <div class="detail_category">
+        <span class="detail_category_item">상의</span>
+        <span class="detail_category_item">팬츠</span>
+        <span class="detail_category_item">스커트</span>
+        <span class="detail_category_item">운동화</span>
+        <span class="detail_category_item">스포츠용품</span>
+    </div>
+
+    <div class="sort">
+        <img src="/img/filter.png" alt="" class="sort_filter_icon">
+        <span>추천순</span>
+    </div>
+
+    <div class="expert_opinion">
+        <div class="expert_opinion_header">
+            <span>전문가 의견 참고하기</span>
+            <img src="/img/arrow.png" alt="" class="expert_opinion_arrow">
+        </div>
+        <div class="expert_opinion_main">
 
         </div>
-    
-        <div class="clothes_image_container">
-            <div class="cloth_image_row_container">
-                <div class="cloth_image"><img src="" alt=""></div>
-                <div class="cloth_image"><img src="" alt=""></div>
-                <div class="cloth_image"><img src="" alt=""></div>
-                <div class="cloth_image"><img src="" alt=""></div>
-                <div class="cloth_image"><img src="" alt=""></div>
-            </div>
-            <div class="cloth_image_row_container">
-                <div class="cloth_image"><img src="" alt=""></div>
-                <div class="cloth_image"><img src="" alt=""></div>
-                <div class="cloth_image"><img src="" alt=""></div>
-                <div class="cloth_image"><img src="" alt=""></div>
-                <div class="cloth_image"><img src="" alt=""></div>
-            </div>
+
+    </div>
+
+    <div class="clothes_image_container">
+        <div class="cloth_image_row_container">
+            <div class="cloth_image"><img src="" alt=""></div>
+            <div class="cloth_image"><img src="" alt=""></div>
+            <div class="cloth_image"><img src="" alt=""></div>
+            <div class="cloth_image"><img src="" alt=""></div>
+            <div class="cloth_image"><img src="" alt=""></div>
         </div>
-        <div class="clothes_image_page_container">
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
+        <div class="cloth_image_row_container">
+            <div class="cloth_image"><img src="" alt=""></div>
+            <div class="cloth_image"><img src="" alt=""></div>
+            <div class="cloth_image"><img src="" alt=""></div>
+            <div class="cloth_image"><img src="" alt=""></div>
+            <div class="cloth_image"><img src="" alt=""></div>
         </div>
-    </main>
-    
+    </div>
+    <div class="clothes_image_page_container">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </div>
+</main>
+
 </body>
 </html>
