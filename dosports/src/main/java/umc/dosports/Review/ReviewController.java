@@ -67,6 +67,18 @@ public class ReviewController {
         return reviewService.deleteReview(idx);
     }
 
+    /*상품목록페이지*/
+    @GetMapping("/review/productList")
+    public String filter() {
+        return "reviews/productList";
+    }
+
+    /*상품목록-상품리뷰페이지*/
+    @GetMapping("/review/product")
+    public String product() {
+        return "reviews/reviewList";
+    }
+
     /*리뷰 상세보기*/
     @GetMapping("/review/{idx}")
     @ResponseBody

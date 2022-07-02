@@ -41,7 +41,7 @@ public class UserController {
         return result;
     }
 
-    /*모든 user*/
+    /*모든user조회*/
     @GetMapping("/user")
     @ResponseBody
     public List<User> getAllUser(){
@@ -79,7 +79,7 @@ public class UserController {
     public String mypage() {
         return "users/createForm";
     }
-    /*마이페이지 userinfo 입력*/
+    /*마이페이지userinfo페이지*/
     @GetMapping("/user/info")
     public String createInfoForm() {
         return "users/createUserInfoForm";
