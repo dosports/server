@@ -1,11 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>reviewList</title>
+    <link href="/css/reviewList.css" rel="stylesheet">
+    <title>해커톤</title>
 </head>
+
 <body>
-<h1>review list</h1>
-<a href="/review/new">review create</a>
+
+<div class="flex navbar">
+    <div>
+        <button>
+            <img class="header-icon" src="/img/hamburgerBar.png">
+        </button>
+    </div>
+
+    <div>
+        <a href="">
+            <img id="logo" src="/img/logo-test.png">
+        </a>
+    </div>
+
+
+    <div id="search">
+        <form>
+            <input type="text" />
+            <button type="submit">
+                <img class="glass" src="/img/glass.png">
+            </button>
+        </form>
+    </div>
+</div>
+
+
+<div class="flex center">
+    <img id="product-img" src="/img/pants.png" width="225px" height="225px">
+
+    <div class="product">
+        <div>
+            <div>상품명</div>
+            <div>판매처</div>
+            <div>가격</div>
+        </div>
+        <div class="box">
+            <a class="box1" href="">찜목록 추가</a>
+            <a class="box1" href="">리뷰 쓰기</a>
+            <a class="box1" href="">구매하러 가기</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="flex middle-bar">
+    <a href="">상품 정보</a>
+    <a href="">리뷰</a>
+    <a href="">Q&A</a>
+</div>
+
+
+<h3 id="satisfaction">상품 만족도</h3>
+
+
+<div class="flex star-center">
+        <span class="star">
+            ★★★★★
+            <span>★★★★★</span>
+            <input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+        </span>
+</div>
+
+<hr class="hr-top">
+
+<div class="review-margin">
+    <h3>
+        사용자들의 리뷰
+    </h3>
+</div>
+
+<div class="review">
+    <img class="review-img" src="/img/pants.png">
+    <div class="user-info">
+        <span>사용자명</span>
+        <span>| 등록자일</span>
+    </div>
+    <div class="review-content">
+        <div>구매 옵션 | </div>
+        <div class="content">
+            <p>리뷰 내용</p>
+        </div>
+    </div>
+</div>
+
+<div class="hr-bottom">
+    <hr>
+</div>
+
+<script src="/js/reviewList.js"></script>
+
 </body>
+
 </html>
