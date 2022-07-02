@@ -16,20 +16,26 @@ import java.util.UUID;
 public class ReviewController {
 
     private final ReviewService reviewService;
-    private static final String UPLOAD_PATH = "C:\\Users\\user\\Desktop\\server\\dosports\\src\\main\\resources\\image";
+    private static final String UPLOAD_PATH = "C:\\Users\\JeaYoung Kim\\Desktop\\dosports\\src\\main\\resources\\image";
 
     @Autowired
     public ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
     }
 
-    @GetMapping("/post")
+    @GetMapping("/review")
     @ResponseBody
     public List<Review> getAllReviews(){
         return reviewService.findReviews();
     }
 
-    @PostMapping("/post")
+    /*review create*/
+    @GetMapping("/review/new")
+    public String createReview() {
+        return "reviews/createReviewForm";
+    }
+    /*review form*/
+    @PostMapping("/review")
     @ResponseBody
     public Object create(ReviewForm form, @RequestParam MultipartFile file) throws IOException {
         Review review = new Review();

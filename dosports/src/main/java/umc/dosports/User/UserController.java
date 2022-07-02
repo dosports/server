@@ -32,6 +32,10 @@ public class UserController {
         return userService.findUsers();
     }
 
+    @GetMapping("/user/loginForm")
+    public String login() {
+        return "users/loginForm";
+    }
     @PostMapping("/login")
     @ResponseBody
     public Object login(@RequestBody UserForm form) {
@@ -66,18 +70,14 @@ public class UserController {
         return userService.deleteUser(id);
     }
 
-    @GetMapping("security/generate/token")
-    public Map<String, Object> generateToken(@RequestParam String subject) {
-        String token = securityService.createToken(subject, 1000 * 60 * 60 * 24L);    // 24시간
-        Map<String, Object> map = new HashMap<>();
-        map.put("userid", subject);
-        map.put("token", token);
-        return map;
+    /*마이페이지*/
+    @GetMapping("/user/mypage")
+    public String mypage() {
+        return "users/createForm";
     }
-
-    @GetMapping("security/get/subject")
-    public String getSubject(@RequestParam String token) {
-        String subject = securityService.getSubject(token);
-        return subject;
+    /*마이페이지 userinfo 입력*/
+    @GetMapping("/user/info")
+    public String createInfoForm() {
+        return "users/createUserInfoForm";
     }
 }
