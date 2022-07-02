@@ -23,11 +23,12 @@ public class JdbcTemplateUserRepository implements UserRepository{
     @Override
     public Long save(User user) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-        jdbcInsert.withTableName("user").usingGeneratedKeyColumns("idx");
+        jdbcInsert.withTableName("user").usingGeneratedKeyColumns("userIdx");
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("email", user.getEmail());
         parameters.put("passwd", user.getPasswd());
         parameters.put("name", user.getName());
+        parameters.put("gender", user.getGender());
         Number key = jdbcInsert.executeAndReturnKey(new
                 MapSqlParameterSource(parameters));
         return key.longValue();
@@ -36,7 +37,7 @@ public class JdbcTemplateUserRepository implements UserRepository{
     @Override
     public Long login(String email, String passwd) {
         try {
-            String sql = "select idx from user where email = ? and passwd = ?";
+            String sql = "select userIdx from user where email = ? and passwd = ?";
             Object[] params = new Object[]{email, passwd};
             Long userIdx = jdbcTemplate.queryForObject(sql, params, Long.class);
             return userIdx;
@@ -46,8 +47,8 @@ public class JdbcTemplateUserRepository implements UserRepository{
     }
 
     @Override
-    public Optional<User> findById(Long id) {
-        List<User> result = jdbcTemplate.query("select * from user where idx = ?", userRowMapper(), id);
+    public Optional<User> findById(Long idx) {
+        List<User> result = jdbcTemplate.query("select * from user where userIdx = ?", userRowMapper(), idx);
         return result.stream().findAny();
     }
 
@@ -58,8 +59,14 @@ public class JdbcTemplateUserRepository implements UserRepository{
     }
 
     @Override
-    public String update(Long id, User user) {
-        return null;
+    public String update(Long idx, User user) {
+        try {
+            String sql = "update user set height=? weight=? where userIdx=?";
+            jdbcTemplate.update(sql, user.getHeight(), user.getWeight(), idx);
+            return "성공적으로 수정되었습니다.";
+        } catch (EmptyResultDataAccessException e) {
+            return "유저 정보 수정에 실패했습니다.";
+        }
     }
 
     @Override
@@ -75,10 +82,13 @@ public class JdbcTemplateUserRepository implements UserRepository{
     private RowMapper<User> userRowMapper() {
         return (rs, rowNum) -> {
             User user = new User();
-            user.setIdx(rs.getLong("idx"));
+            user.setIdx(rs.getLong("userIdx"));
             user.setName(rs.getString("name"));
             user.setPasswd(rs.getString("passwd"));
             user.setEmail(rs.getString("email"));
+            user.setGender(Gender.values()[rs.getInt("gender")]);
+            user.setHeight(rs.getDouble("height"));
+            user.setWeight(rs.getInt("weight"));
             return user;
         };
     }

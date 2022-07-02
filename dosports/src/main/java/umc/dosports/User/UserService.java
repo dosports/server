@@ -1,15 +1,20 @@
 package umc.dosports.User;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.List;
 import java.util.Optional;
 
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
+
 
     /**
      * 회원 가입
@@ -45,5 +50,9 @@ public class UserService {
      */
     public String deleteUser(Long id) {
         return userRepository.delete(id);
+    }
+
+    public String updateUser(Long id, User user) {
+        return userRepository.update(id, user);
     }
 }

@@ -1,5 +1,10 @@
 package umc.dosports.User;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import java.util.Set;
+
 enum Gender {
     male, female
 }
@@ -67,5 +72,12 @@ public class User {
     public void setWeight(int weight) {
         this.weight = weight;
     }
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_authority",
+            joinColumns = {@JoinColumn(name = "userIdx", referencedColumnName = "userIdx")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
+    private Set<Authority> authorities;
 }
 

@@ -16,7 +16,7 @@ import java.util.UUID;
 public class ReviewController {
 
     private final ReviewService reviewService;
-    private static final String UPLOAD_PATH = "C:\\Users\\김송미\\Documents\\dosports\\dosports\\src\\main\\resources\\image";
+    private static final String UPLOAD_PATH = "C:\\Users\\user\\Desktop\\server\\dosports\\src\\main\\resources\\image";
 
     @Autowired
     public ReviewController(ReviewService reviewService) {

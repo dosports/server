@@ -12,6 +12,8 @@ import java.util.Map;
 public class UserController {
 
     private final UserService userService;
+    @Autowired
+    private SecurityService securityService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -62,5 +64,20 @@ public class UserController {
     @ResponseBody
     public String deleteUser(@PathVariable(name = "id") Long id) {
         return userService.deleteUser(id);
+    }
+
+    @GetMapping("security/generate/token")
+    public Map<String, Object> generateToken(@RequestParam String subject) {
+        String token = securityService.createToken(subject, 1000 * 60 * 60 * 24L);    // 24시간
+        Map<String, Object> map = new HashMap<>();
+        map.put("userid", subject);
+        map.put("token", token);
+        return map;
+    }
+
+    @GetMapping("security/get/subject")
+    public String getSubject(@RequestParam String token) {
+        String subject = securityService.getSubject(token);
+        return subject;
     }
 }

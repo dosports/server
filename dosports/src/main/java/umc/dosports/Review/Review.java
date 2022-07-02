@@ -11,15 +11,15 @@ public class Review {
     private String img_path;
     private String contents;
 
-    private level level;
+//    private level level;
 
-    public umc.dosports.Review.level getLevel() {
-        return level;
-    }
+//    public umc.dosports.Review.level getLevel() {
+//        return level;
+//    }
 
-    public void setLevel(umc.dosports.Review.level level) {
-        this.level = level;
-    }
+//    public void setLevel(umc.dosports.Review.level level) {
+//        this.level = level;
+//    }
 
     public long getIdx() {
         return idx;
