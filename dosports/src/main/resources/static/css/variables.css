@@ -1,7 +1,6 @@
 :root {
-  --red : #ff385c;
-  --border: #ebebeb;
-  --text: #6f6f6f;
-  --white: #fff;
-  --text-black: #222;
+	--red: #ff385c;
+	--border: #ebebeb;
+	--sub1: #b0a8ba;
+	--sub2: #7b7485;
 }
