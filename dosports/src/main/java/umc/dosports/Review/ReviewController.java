@@ -61,7 +61,7 @@ public class ReviewController {
         return img_path;
     }
 
-    @DeleteMapping("/post/{idx}")
+    @DeleteMapping("/review/{idx}")
     @ResponseBody
     public String deleteReview(@PathVariable(name = "idx") Long idx) {
         return reviewService.deleteReview(idx);
