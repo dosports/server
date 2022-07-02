@@ -20,35 +20,12 @@ public class UserController {
         this.userService = userService;
     }
 
-
+    /*회원가입페이지*/
     @GetMapping("/users/new")
     public String createForm() {
         return "users/createUserForm";
     }
-
-    @GetMapping("/user")
-    @ResponseBody
-    public List<User> getAllUser(){
-        return userService.findUsers();
-    }
-
-    @GetMapping("/user/loginForm")
-    public String login() {
-        return "users/loginForm";
-    }
-    @PostMapping("/login")
-    @ResponseBody
-    public Object login(@RequestBody UserForm form) {
-        String email = form.getEmail();
-        String passwd = form.getPasswd();
-
-        long userIdx = userService.login(email, passwd);
-        Map<String, Long> result = new HashMap<>();
-        result.put("userIdx", userIdx);
-
-        return result;
-    }
-
+    /*회원가입form*/
     @PostMapping("/user")
     @ResponseBody
     public Object join(@RequestBody UserForm form) {
@@ -64,6 +41,33 @@ public class UserController {
         return result;
     }
 
+    /*모든 user*/
+    @GetMapping("/user")
+    @ResponseBody
+    public List<User> getAllUser(){
+        return userService.findUsers();
+    }
+
+    /*로그인 페이지*/
+    @GetMapping("/user/loginForm")
+    public String login() {
+        return "users/loginForm";
+    }
+    /*로그인 form*/
+    @PostMapping("/login")
+    @ResponseBody
+    public Object login(@RequestBody UserForm form) {
+        String email = form.getEmail();
+        String passwd = form.getPasswd();
+
+        long userIdx = userService.login(email, passwd);
+        Map<String, Long> result = new HashMap<>();
+        result.put("userIdx", userIdx);
+
+        return result;
+    }
+
+    /*회원 탈퇴*/
     @DeleteMapping("/user/{id}")
     @ResponseBody
     public String deleteUser(@PathVariable(name = "id") Long id) {
@@ -71,7 +75,7 @@ public class UserController {
     }
 
     /*마이페이지*/
-    @GetMapping("/user/mypage")
+    @GetMapping("/user/mypage/{idx}")
     public String mypage() {
         return "users/createForm";
     }

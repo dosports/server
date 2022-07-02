@@ -1,11 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Hello</title>
+    <meta charset="UTF-8" />
+    <title>해커톤</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
-    <h1>Hello</h1>
-    <h2>DoSports Homepage</h2>
+<header class="flex_row">
+    <div id="header-logo">
+        <img src="../img/logo.png" />
+    </div>
+    <div id="header-search_bar">
+        <form class="flex_row">
+            <input />
+            <button><img id="header-search_btn" src="../img/glass.png" /></button>
+        </form>
+    </div>
+    <div id="header-right" class="flex_row">
+        <div class="header-right-text divider">00님 안녕하세요</div>
+        <div class="header-right-text divider">찜 목록</div>
+        <div class="header-right-text divider">스탬프</div>
+        <div class="header-right-text divider">마이페이지</div>
+        <div class="header-right-text">로그아웃</div>
+    </div>
+</header>
+<nav>
+    <div id="nav_bar" class="flex_row">
+        <div class="nav-menu-item">
+            <div class="flex_row">
+                <img id="nav-menu_btn" src="../img/hamburgerBar.png" />
+            </div>
+        </div>
+        <div class="nav-menu-item">
+            <div class="nav-menu-text">기획전</div>
+        </div>
+        <div class="nav-menu-item">
+            <div class="nav-menu-text">세일</div>
+        </div>
+        <div class="nav-menu-item">
+            <div class="nav-menu-text">랭킹</div>
+        </div>
+        <div class="nav-menu-item">
+            <div class="nav-menu-text">쿠폰존</div>
+        </div>
+    </div>
+    <div id="nav_bar_categorys">
+        <div class="flex_row">
+            <div class="nav_bar_category">
+                <div class="category_name">운동별</div>
+                <div class="category-detail">
+                    <div class="detail_item">헬스</div>
+                    <div class="detail_item">요가/필라테스</div>
+                    <div class="detail_item">테니스</div>
+                    <div class="detail_item">골프</div>
+                    <div class="detail_item">수영</div>
+                </div>
+            </div>
+            <div class="nav_bar_category">
+                <div class="category_name">브랜드별</div>
+                <div class="category-detail">
+                    <div class="detail_item">나이키</div>
+                    <div class="detail_item">아디다스</div>
+                    <div class="detail_item">젝스미스</div>
+                    <div class="detail_item">안다르</div>
+                </div>
+            </div>
+            <div class="nav_bar_category">
+                <div class="category_name">트레이닝 도구</div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div id="content">
+    <div id="ad">
+        <!-- <img src="https://cdn.pixabay.com/photo/2017/08/31/09/11/cliff-2699812_960_720.jpg" alt="" /> -->
+        <div id="ad-page" class="flex_row">
+            <div class="npage"></div>
+            <div class="npage"></div>
+            <div class="npage"></div>
+        </div>
+    </div>
+    <div id="recommend">
+        <div class="banner_title">00 님께 추천하고 싶은 상품들</div>
+        <div id="recommend-list">
+            <button id="recommend-next_btn">
+                <img src="../img/arrow.png" alt="" />
+            </button>
+            <button id="recommend-prev_btn">
+                <img src="../img/arrow2.png" alt="" />
+            </button>
+            <div class="recommend-item">
+                <img
+                        src="https://assets.adidas.com/images/w_600,f_auto,q_auto/c8bb66713ae04d909308adf9008a3fa1_9366/ZX_8000_White_GV7618_01_standard.jpg"
+                        alt=""
+                />
+                <div class="recommend-item-text">
+                    <div>뉴발란스 530</div>
+                    <div>53000원</div>
+                </div>
+            </div>
+            <div class="recommend-item">
+                <img
+                        src="https://assets.adidas.com/images/w_600,f_auto,q_auto/b9c80657673441c99149addd0117dfd7_9366/Beige_HA6024_21_model.jpg"
+                        alt=""
+                />
+                <div class="recommend-item-text">
+                    <div>뉴발란스 530</div>
+                    <div>53000원</div>
+                </div>
+            </div>
+            <div class="recommend-item">
+                <img
+                        src="https://assets.adidas.com/images/w_600,f_auto,q_auto/e08992e404f540d59de5ad7b00a22973_9366/OZWEEGO_CELOX_White_GX3330_01_standard.jpg"
+                        alt=""
+                />
+                <div class="recommend-item-text">
+                    <div>뉴발란스 530</div>
+                    <div>53000원</div>
+                </div>
+            </div>
+            <div class="recommend-item">
+                <img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/124778687b9a413393a2ad9e00f41729_9366/Grey_HC1982_21_model.jpg" alt="" />
+            </div>
+            <div class="recommend-item">
+                <img
+                        src="https://assets.adidas.com/images/w_600,f_auto,q_auto/42a003dbe53843a0abb6ad6d0148a29f_9366/x_White_GZ3319_01_standard.jpg"
+                        alt=""
+                />
+                <div class="recommend-item-text">
+                    <div>뉴발란스 530</div>
+                    <div>53000원</div>
+                </div>
+            </div>
+            <div class="recommend-item">
+                <img
+                        src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/d5a6127e1cc34ef1a66dae7a00c9cc6a_9366/4athlts-%EC%BA%A0%ED%8D%BC-%EB%B0%B1%ED%8C%A9.jpg"
+                        alt=""
+                />
+                <div class="recommend-item-text">
+                    <div>뉴발란스 530</div>
+                    <div>53000원</div>
+                </div>
+            </div>
+            <div class="recommend-item">
+                <img
+                        src="https://assets.adidas.com/images/w_600,f_auto,q_auto/c8bb66713ae04d909308adf9008a3fa1_9366/ZX_8000_White_GV7618_01_standard.jpg"
+                        alt=""
+                />
+                <div class="recommend-item-text">
+                    <div>뉴발란스 530</div>
+                    <div>53000원</div>
+                </div>
+            </div>
+            <div class="recommend-item">
+                <img
+                        src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/57b519f7bbc84f20b45eaa2200d76972_9366/%EC%BF%A0%EC%85%98-%EB%A1%9C%EC%9A%B0%EC%82%AD%EC%8A%A4-1pp.jpg"
+                        alt=""
+                />
+                <div class="recommend-item-text">
+                    <div>뉴발란스 530</div>
+                    <div>53000원</div>
+                </div>
+            </div>
+            <div class="recommend-item">
+                <img
+                        src="https://assets.adidas.com/images/w_600,f_auto,q_auto/c8bb66713ae04d909308adf9008a3fa1_9366/ZX_8000_White_GV7618_01_standard.jpg"
+                        alt=""
+                />
+                <div class="recommend-item-text">
+                    <div>뉴발란스 530</div>
+                    <div>53000원</div>
+                </div>
+            </div>
+            <div class="recommend-item">
+                <img
+                        src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/05745923250846b082dfadd10003a7e5_9366/%ED%85%8C%EB%A0%89%EC%8A%A4-%ED%95%98%EC%9D%B4%ED%81%AC-%EA%B7%B8%EB%9E%98%ED%94%BD-%ED%8B%B0.jpg"
+                        alt=""
+                />
+                <div class="recommend-item-text">
+                    <div>뉴발란스 530</div>
+                    <div>53000원</div>
+                </div>
+            </div>
+            <div class="recommend-item">
+                <img
+                        src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/9fba8ecc7a5e48838e4fadcc012fa329_9366/%EC%8A%A4%ED%85%8C%EC%9D%B4%ED%8A%B8%EB%A8%BC%ED%8A%B8-%ED%94%84%EB%9D%BC%EC%9E%84%EB%8B%88%ED%8A%B8-%ED%94%8C%EB%A6%AC%EC%B8%A0-%EC%8A%A4%EC%BB%A4%ED%8A%B8.jpg"
+                        alt=""
+                />
+                <div class="recommend-item-text">
+                    <div>뉴발란스 530</div>
+                    <div>53000원</div>
+                </div>
+            </div>
+            <div class="recommend-item">
+                <img
+                        src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/78d944fc7aa445b4924bae92010e11dc_9366/%EC%8A%A4%ED%85%94%EB%9D%BC-%ED%8A%B8%EB%A3%A8%ED%8E%98%EC%9D%B4%EC%8A%A4-%EB%9F%AC%EB%8B%9D-%EB%B0%94%EC%9D%B4%ED%81%AC-%ED%83%80%EC%9D%B4%EC%B8%A0.jpg"
+                        alt=""
+                />
+                <div class="recommend-item-text">
+                    <div>뉴발란스 530</div>
+                    <div>53000원</div>
+                </div>
+            </div>
+            <div class="recommend-item">
+                <img
+                        src="https://assets.adidas.com/images/w_600,f_auto,q_auto/c8bb66713ae04d909308adf9008a3fa1_9366/ZX_8000_White_GV7618_01_standard.jpg"
+                        alt=""
+                />
+                <div class="recommend-item-text">
+                    <div>뉴발란스 530</div>
+                    <div>53000원</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="best">
+        <div>
+            <div class="banner_title">요즘 잘나가는 best 상품</div>
+            <div id="best-menu" class="flex_row">
+                <div class="best-menu-text">상의</div>
+                <div class="best-menu-text">팬츠</div>
+                <div class="best-menu-text">스커트</div>
+                <div class="best-menu-text">운동화</div>
+                <div class="best-menu-text">스포츠 용품</div>
+            </div>
+            <div id="best-list">
+                <div class="best-item">
+                    <img
+                            src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/de59e3ce7d2246fd815bae8800e6c94f_9366/%EB%A6%BD-%EB%93%9C%EB%A0%88%EC%8A%A4.jpg"
+                            alt=""
+                    />
+                    <div class="best-item-text">
+                        <div>티셔츠</div>
+                        <div>53000원</div>
+                    </div>
+                </div>
+                <div class="best-item">
+                    <img
+                            src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/443a843c8dd0401ab3dbae8800e66826_9366/%EB%A6%BD-%EB%B0%94%EC%9D%B4%EC%BB%A4-%EC%87%BC%EC%B8%A0.jpg"
+                            alt=""
+                    />
+                    <div class="best-item-text">
+                        <div>티셔츠</div>
+                        <div>53000원</div>
+                    </div>
+                </div>
+                <div class="best-item">
+                    <img
+                            src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/7b438ea88d2e4b008adeaebb01108c10_9366/%ED%95%98%EC%9D%B4%ED%8D%BC%EA%B8%80%EB%9E%A8-%ED%8C%8C%EC%9B%8C%EB%A6%AC%EC%95%A1%ED%8A%B8-%EB%AF%B8%EB%94%94%EC%97%84-%EC%84%9C%ED%8F%AC%ED%8A%B8-%ED%85%8C%ED%81%AC%ED%95%8F-%EB%B8%8C%EB%9D%BC.jpg"
+                            alt=""
+                    />
+                    <div class="best-item-text">
+                        <div>티셔츠</div>
+                        <div>53000원</div>
+                    </div>
+                </div>
+                <div class="best-item">
+                    <img
+                            src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/b305b713da7e4ed7ac7fae9a012bfdd1_9366/%ED%95%98%EC%9D%B4%ED%8D%BC%EA%B8%80%EB%9E%A8-%EB%9F%AC%EB%8B%9D-%EC%87%BC%EC%B8%A0.jpg"
+                            alt=""
+                    />
+                    <div class="best-item-text">
+                        <div>티셔츠</div>
+                        <div>53000원</div>
+                    </div>
+                </div>
+                <div class="best-item">
+                    <img
+                            src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/f6eb3c1f80dd40e49679ae9a011f460b_9366/%ED%95%98%EC%9D%B4%ED%8D%BC%EA%B8%80%EB%9E%A8-%ED%83%B1%ED%81%AC%ED%83%91.jpg"
+                            alt=""
+                    />
+                    <div class="best-item-text">
+                        <div>티셔츠</div>
+                        <div>53000원</div>
+                    </div>
+                </div>
+                <div class="best-item">
+                    <img
+                            src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/d9d36892b22e45b48feead8701467ca1_9366/%EB%8D%94%ED%94%8C-%EB%B0%B1.jpg"
+                            alt=""
+                    />
+                    <div class="best-item-text">
+                        <div>티셔츠</div>
+                        <div>53000원</div>
+                    </div>
+                </div>
+                <div class="best-item">
+                    <img
+                            src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/9ab07d7d3a5d4ebd9958adfd00c53eb4_9366/%EC%BD%98%EB%94%94%EB%B3%B4-22-%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%8B%9D-%ED%83%91.jpg"
+                            alt=""
+                    />
+                    <div class="best-item-text">
+                        <div>티셔츠</div>
+                        <div>53000원</div>
+                    </div>
+                </div>
+                <div class="best-item">
+                    <img src="https://image.nbkorea.com/NBRB_Product/20220630/NB20220630162141624001.jpg" alt="" />
+                    <div class="best-item-text">
+                        <div>티셔츠</div>
+                        <div>53000원</div>
+                    </div>
+                </div>
+                <div class="best-item">
+                    <img
+                            src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/f840153a70d7494db04eaec401055ee0_9366/%EB%A0%88%EC%95%8C-%EB%A7%88%EB%93%9C%EB%A6%AC%EB%93%9C-22-23-%EC%96%B4%EC%9B%A8%EC%9D%B4-%EC%A0%80%EC%A7%80.jpg"
+                            alt=""
+                    />
+                    <div class="best-item-text">
+                        <div>티셔츠</div>
+                        <div>53000원</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button></button>
+            </div>
+            <div></div>
+            <div>
+                <button></button>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div></div>
+</footer>
+<script src="/js/main.js"></script>
 </body>
 </html>

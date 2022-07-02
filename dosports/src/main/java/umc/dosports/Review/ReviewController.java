@@ -7,10 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class ReviewController {
@@ -23,18 +20,19 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
+    /*모든 리뷰*/
     @GetMapping("/review")
     @ResponseBody
     public List<Review> getAllReviews(){
         return reviewService.findReviews();
     }
 
-    /*review create*/
+    /*리뷰작성페이지*/
     @GetMapping("/review/new")
     public String createReview() {
         return "reviews/createReviewForm";
     }
-    /*review form*/
+    /*리뷰작성form*/
     @PostMapping("/review")
     @ResponseBody
     public Object create(ReviewForm form, @RequestParam MultipartFile file) throws IOException {
@@ -51,6 +49,7 @@ public class ReviewController {
         return result;
     }
 
+    /*사진저장*/
     private String saveFile(MultipartFile file) throws IOException {
         UUID uuid = UUID.randomUUID();
         String img_path = uuid + "_" + file.getOriginalFilename();
@@ -61,9 +60,17 @@ public class ReviewController {
         return img_path;
     }
 
+    /*리뷰 삭제하기*/
     @DeleteMapping("/review/{idx}")
     @ResponseBody
     public String deleteReview(@PathVariable(name = "idx") Long idx) {
         return reviewService.deleteReview(idx);
+    }
+
+    /*리뷰 상세보기*/
+    @GetMapping("/review/{idx}")
+    @ResponseBody
+    public Optional<Review> getReview(@PathVariable(name = "idx") Long idx){
+        return reviewService.findOne(idx);
     }
 }
