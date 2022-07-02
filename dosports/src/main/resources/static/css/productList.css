@@ -6,6 +6,7 @@ main{
     display: flex;
     align-items: center;
     padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
 }
 .current_page_position span{
@@ -86,6 +87,7 @@ main{
 .expert_opinion_arrow_up{
     transform: rotate(-90deg);
 }
+
 /* clothes_image_container */
 .clothes_image_container{
     display: grid;
@@ -110,6 +112,10 @@ main{
 .cloth_image_row_container:last-child{
     margin-bottom: 5.6rem;
 }
+.cloth_image img{
+    width: 100%;
+    height: 100%;
+}
 
 /* clothes_image_page_container */
 .clothes_image_page_container{
@@ -125,4 +131,73 @@ main{
 
 .clothes_image_page_container span:hover{
     cursor: pointer;
+}
+.page_check{
+    font-weight: 600;
+}
+
+/* header */
+
+header {
+    background-color: white;
+    margin-bottom: 3rem;
+    width: 100%;
+    max-width: 100%;
+    padding: 4rem 10rem;
+}
+
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    justify-self: center;
+    background-color: var(--white);
+    width: 100%;
+}
+
+.hamburger-bar {
+    margin-right: 30.2rem;
+    cursor: pointer;
+}
+
+.hamburger-bar img {
+    width: 3rem;
+    height: 3rem ;
+}
+
+.logo {
+    margin-right: 2rem;
+    text-align: center;
+}
+
+.logo img {
+    width: 19.5rem;
+    height: 4.8rem;
+}
+
+.search button {
+    border:  0;
+    outline: 0;
+    background-color: transparent;
+}
+
+.search {
+    display: flex;
+    width: 25rem;
+    height: 4rem;
+    border : 2px solid var(--border);
+    border-radius: 26.5px;
+
+    right: 0;
+}
+
+.search input {
+    width: 80%;
+    height: 80%;
+    border: 0;
+    background-color: transparent;
+}
+
+.search button img {
+    width : 2.4rem;
+    height: 2.4rem;
 }
