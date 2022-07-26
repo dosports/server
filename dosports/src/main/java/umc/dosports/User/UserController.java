@@ -3,6 +3,7 @@ package umc.dosports.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import umc.dosports.jwt.TokenProvider;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +13,9 @@ import java.util.Map;
 public class UserController {
 
     private final UserService userService;
-    @Autowired
-    private SecurityService securityService;
+    private TokenProvider tokenProvider = new TokenProvider();
+//    @Autowired
+//    private SecurityService securityService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -25,6 +27,7 @@ public class UserController {
     public String createForm() {
         return "users/createUserForm";
     }
+
     /*회원가입form*/
     @PostMapping("/user")
     @ResponseBody
@@ -53,6 +56,7 @@ public class UserController {
     public String login() {
         return "users/loginForm";
     }
+
     /*로그인 form*/
     @PostMapping("/login")
     @ResponseBody
@@ -61,8 +65,10 @@ public class UserController {
         String passwd = form.getPasswd();
 
         long userIdx = userService.login(email, passwd);
-        Map<String, Long> result = new HashMap<>();
+        String token = tokenProvider.makeJwtToken(userIdx);
+        Map<String, Object> result = new HashMap<>();
         result.put("userIdx", userIdx);
+        result.put("token", token);
 
         return result;
     }
