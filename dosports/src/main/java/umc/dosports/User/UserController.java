@@ -1,6 +1,7 @@
 package umc.dosports.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import umc.dosports.jwt.TokenProvider;
@@ -14,6 +15,8 @@ public class UserController {
 
     private final UserService userService;
     private TokenProvider tokenProvider = new TokenProvider();
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 //    @Autowired
 //    private SecurityService securityService;
 
@@ -34,8 +37,9 @@ public class UserController {
     public Object join(@RequestBody UserForm form) {
         User user = new User();
         user.setEmail(form.getEmail());
-        user.setPasswd(form.getPasswd());
+        user.setPasswd(passwordEncoder.encode(form.getPasswd()));
         user.setName(form.getName());
+        user.setGender(form.getGender());
 
         long userIdx = userService.join(user);
         Map<String, Long> result = new HashMap<>();

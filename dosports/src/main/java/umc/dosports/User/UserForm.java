@@ -1,10 +1,12 @@
 package umc.dosports.User;
 
+import java.io.InputStream;
+
 public class UserForm {
     private String name;
     private String email;
     private String passwd;
-    private Gender gender;
+    private String gender;
     private double height;
     private int weight;
 
@@ -32,11 +34,9 @@ public class UserForm {
         this.passwd = passwd;
     }
 
-    public Gender getGender() {
-        return gender;
-    }
+    public String getGender() { return gender; }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

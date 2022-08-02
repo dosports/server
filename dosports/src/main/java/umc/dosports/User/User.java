@@ -3,19 +3,36 @@ package umc.dosports.User;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import java.io.InputStream;
+import java.sql.Date;
 import java.util.Set;
 
-enum Gender {
-    male, female
-}
 public class User {
     private long idx;
     private String name;
     private String email;
     private String passwd;
-    private Gender gender;
-    private double height;
+    private String gender;
+    private int height;
     private int weight;
+    private Date regDate;
+    private Date updateDate;
+
+    public Date getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 
     public long getIdx() {
         return idx;
@@ -49,11 +66,11 @@ public class User {
         this.passwd = passwd;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -61,7 +78,7 @@ public class User {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 

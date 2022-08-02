@@ -1,19 +1,20 @@
 package umc.dosports.User;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class JdbcTemplateUserRepository implements UserRepository{
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     private final JdbcTemplate jdbcTemplate;
 
     public JdbcTemplateUserRepository(DataSource dataSource) {
@@ -37,11 +38,11 @@ public class JdbcTemplateUserRepository implements UserRepository{
     @Override
     public Long login(String email, String passwd) {
         try {
-            String sql = "select userIdx from user where email = ? and passwd = ?";
-            Object[] params = new Object[]{email, passwd};
-            Long userIdx = jdbcTemplate.queryForObject(sql, params, Long.class);
-            return userIdx;
-        } catch (EmptyResultDataAccessException e) {
+            Optional<User> user = findByEmail(email);
+            if (passwordEncoder.matches(passwd, user.get().getPasswd())) {
+                return user.get().getIdx();
+            } else return Long.parseLong("-1");
+        } catch (NoSuchElementException e) {
             return Long.parseLong("-1");
         }
     }
@@ -49,6 +50,12 @@ public class JdbcTemplateUserRepository implements UserRepository{
     @Override
     public Optional<User> findById(Long idx) {
         List<User> result = jdbcTemplate.query("select * from user where userIdx = ?", userRowMapper(), idx);
+        return result.stream().findAny();
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        List<User> result = jdbcTemplate.query("select * from user where email = ?", userRowMapper(), email);
         return result.stream().findAny();
     }
 
@@ -86,8 +93,8 @@ public class JdbcTemplateUserRepository implements UserRepository{
             user.setName(rs.getString("name"));
             user.setPasswd(rs.getString("passwd"));
             user.setEmail(rs.getString("email"));
-            user.setGender(Gender.values()[rs.getInt("gender")]);
-            user.setHeight(rs.getDouble("height"));
+            user.setGender(rs.getString("gender"));
+            user.setHeight(rs.getInt("height"));
             user.setWeight(rs.getInt("weight"));
             return user;
         };
