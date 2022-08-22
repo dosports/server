@@ -6,9 +6,36 @@ public class UserForm {
     private String name;
     private String email;
     private String passwd;
+    private String newPasswd;
     private String gender;
-    private double height;
+    private int height;
     private int weight;
+    private String profileImgPath;
+    private String refreshToken;
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+    public String getProfileImgPath() {
+        return profileImgPath;
+    }
+
+    public void setProfileImgPath(String profileImgPath) {
+        this.profileImgPath = profileImgPath;
+    }
+
+    public String getNewPasswd() {
+        return newPasswd;
+    }
+
+    public void setNewPasswd(String newPasswd) {
+        this.newPasswd = newPasswd;
+    }
 
     public String getName() {
         return name;
@@ -44,7 +71,7 @@ public class UserForm {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 

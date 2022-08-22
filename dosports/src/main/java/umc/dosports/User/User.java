@@ -17,6 +17,42 @@ public class User {
     private int weight;
     private Date regDate;
     private Date updateDate;
+    private String refreshToken;
+    private String mail_key;
+    private boolean mail_auth;
+    private String profileImgPath;
+
+    public String getProfileImgPath() {
+        return profileImgPath;
+    }
+
+    public void setProfileImgPath(String profileImgPath) {
+        this.profileImgPath = profileImgPath;
+    }
+
+    public String getMail_key() {
+        return mail_key;
+    }
+
+    public void setMail_key(String mail_key) {
+        this.mail_key = mail_key;
+    }
+
+    public boolean isMail_auth() {
+        return mail_auth;
+    }
+
+    public void setMail_auth(boolean mail_auth) {
+        this.mail_auth = mail_auth;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 
     public Date getRegDate() {
         return regDate;
@@ -90,11 +126,12 @@ public class User {
         this.weight = weight;
     }
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "user_authority",
-//            joinColumns = {@JoinColumn(name = "userIdx", referencedColumnName = "userIdx")},
-//            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
-//    private Set<Authority> authorities;
+
+    public void updateRefreshToken(String refreshToken){
+        this.refreshToken = refreshToken;
+    }
+    public void destroyRefreshToken(){
+        this.refreshToken = null;
+    }
 }
 
