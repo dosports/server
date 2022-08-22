@@ -19,7 +19,7 @@ public interface ReviewRepository {
     int createReview(PostReviewReq review);
 
     //**********************************************게시글 수정 PATCH*****************************************************
-    int updateReview(long reviewIdx, String title, String content);
+    PatchReviewRes updateReview(long reviewIdx, String title, String content);
 
     //**********************************************게시글 삭제 DELETE****************************************************
     GetReviewRes deleteReview(GetReviewRes getReviewRes, long reviewIdx);

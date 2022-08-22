@@ -34,16 +34,12 @@ public class ReviewService {
     }
 
     //**********************************************게시글 수정 PATCH*****************************************************
-    public String updateReview(long reviewIdx, String title, String content, long userIdxByJwt){
+    public PatchReviewRes updateReview(long reviewIdx, String title, String content, long userIdxByJwt){
         if(!reviewRepository.checkUserEquals(reviewIdx, userIdxByJwt)){
             System.out.println("불일치");
             return null;
         }
-        int result = reviewRepository.updateReview(reviewIdx, title, content);
-        if(result == 0){
-            return "수정 실패";
-        }
-        return "수정 성공";
+        return reviewRepository.updateReview(reviewIdx, title, content);
     }
 
     //**********************************************게시글 삭제 DELETE*****************************************************

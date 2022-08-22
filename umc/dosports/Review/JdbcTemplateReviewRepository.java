@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 import umc.dosports.Review.model.*;
 
 import javax.sql.DataSource;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class JdbcTemplateReviewRepository implements ReviewRepository{
@@ -27,8 +28,7 @@ public class JdbcTemplateReviewRepository implements ReviewRepository{
 
     public List<GetReviewRes> showReviewIdxByFilter(String gender, String sports, GetReviewReq getReviewReq, boolean isPhoto, int sort_param, int page_num){   //category의 저장방식 수정!! 문자열로 변환시 오류 발생
         String findQuery = "select * from ( select ROW_NUMBER() OVER("+sortString(sort_param)+") as rownum, r.* ,u.name "+
-                "from review as r join user as u on r.userIdx = u.userIdx " +
-                "where r.gender = ? and r.sports = ? " +
+                "from review as r join user as u on r.userIdx = u.userIdx where r.gender = ? and r.sports = ? " +
                 ((!getReviewReq.getCategory().equals(""))?"and r.category = ? ":"and ? ")+
                 ((getReviewReq.getHeight() == -1)?"and r.height between ? and ? ":"and ? and ? ")+
                 ((getReviewReq.getWeight() != -1)?"and r.weight between ? and ? ":"and ? and ? ")+
@@ -38,9 +38,11 @@ public class JdbcTemplateReviewRepository implements ReviewRepository{
                         ((getReviewReq.getMax_price() != -1)?"and r.price <= ? ":"and ? "))+
                 ((isPhoto)?" and r.img_path is not null":"")+
                 ") r where rownum between (10*(?)) and (10*(?)) group by r.reviewIdx";
+
         Object[] findQueryParam = new Object[]{gender, sports, (getReviewReq.getCategory().equals(""))?-1: getReviewReq.getCategory(),
                 getReviewReq.getHeight()-5, getReviewReq.getHeight()+5, getReviewReq.getWeight()-5, getReviewReq.getWeight()+5, getReviewReq.getLevel(),
                 getReviewReq.getMin_price(), getReviewReq.getMax_price(), page_num-1, page_num}; //문자열 부분이 빌 경우 필터가 제대로 작동을 안하여 if문을 통해 조정해주었다.
+
         return jdbcTemplate.query(findQuery, reviewRowMapper(), findQueryParam);
     }
 
@@ -90,10 +92,19 @@ public class JdbcTemplateReviewRepository implements ReviewRepository{
         return this.jdbcTemplate.queryForObject(lastInsertIdQuery,int.class);
     }
     @Override
-    public int updateReview(long reviewIdx, String title, String content) {
-        String modifyReviewQuery = "update review set title = ?, content = ? where reviewIdx = ? ";
-        Object[] modifyReviewParams = new Object[]{title, content, reviewIdx};
-        return this.jdbcTemplate.update(modifyReviewQuery,modifyReviewParams);
+    public PatchReviewRes updateReview(long reviewIdx, String title, String content) {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String modifyReviewQuery = "update review set title = ?, content = ?, updateDate=? where reviewIdx = ? ";
+        Object[] modifyReviewParams = new Object[]{title, content,sdf1.format(new Date()), reviewIdx};
+        this.jdbcTemplate.update(modifyReviewQuery,modifyReviewParams);
+        String patchReviewQuery = "select title, content, updateDate from review where reviewIdx = ?";
+        return this.jdbcTemplate.queryForObject(patchReviewQuery, (rs, rowNum)->{
+            PatchReviewRes review = new PatchReviewRes();
+            review.setTitle(rs.getString("title"));
+            review.setContent(rs.getString("content"));
+            review.setUpdateDate(rs.getString("updateDate"));
+            return review;
+        }, reviewIdx);
     }
 
     @Override

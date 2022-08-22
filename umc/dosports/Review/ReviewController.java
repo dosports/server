@@ -93,7 +93,7 @@ public class ReviewController {
 
     @PatchMapping("/{reviewIdx}")
     @ResponseBody
-    public String updateReview(@PathVariable(name = "reviewIdx") long reviewIdx, @RequestBody PatchReviewReq patchReviewReq) {
+    public PatchReviewRes updateReview(@PathVariable(name = "reviewIdx") long reviewIdx, @RequestBody PatchReviewReq patchReviewReq) {
         long userIdxByJwt = 5; //TokenProvider.getUserIdx();
         String title = patchReviewReq.getTitle();
         String content = patchReviewReq.getContent();
