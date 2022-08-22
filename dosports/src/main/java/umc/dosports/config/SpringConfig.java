@@ -1,13 +1,16 @@
-package umc.dosports;
+package umc.dosports.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import umc.dosports.Review.JdbcTemplateReviewRepository;
 import umc.dosports.Review.ReviewRepository;
 import umc.dosports.Review.ReviewService;
 import umc.dosports.User.JdbcTemplateUserRepository;
 import umc.dosports.User.UserRepository;
 import umc.dosports.User.UserService;
+import umc.dosports.jwt.TokenProvider;
 
 import javax.sql.DataSource;
 
@@ -27,6 +30,10 @@ public class SpringConfig {
     public ReviewService reviewService() {
         return new ReviewService(reviewRepository());
     }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 
     @Bean
     public UserRepository userRepository() {
@@ -35,5 +42,9 @@ public class SpringConfig {
     @Bean
     public ReviewRepository reviewRepository() {
         return new JdbcTemplateReviewRepository(dataSource);
+    }
+    @Bean
+    public TokenProvider tokenProvider() {
+        return new TokenProvider();
     }
 }
