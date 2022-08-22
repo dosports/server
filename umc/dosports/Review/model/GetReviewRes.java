@@ -1,10 +1,15 @@
 package umc.dosports.Review.model;
 
-public class GetReviewRequest {
-    private int reviewIdx;
-    private int userIdx;
+
+public class GetReviewRes {
+    private long reviewIdx;
+    private long userIdx;
     private String userName;
     private String img_path;
+    private String img_path1;
+    private String img_path2;
+    private String img_path3;
+    private String img_path4;
     private String brand;
     private String title;
     private String category;
@@ -12,7 +17,7 @@ public class GetReviewRequest {
     private int rate;
     private int likes;
     private int comments;
-    private char gender;
+    private String gender;
     private int height;
     private int weight;
     private int level;
@@ -21,19 +26,19 @@ public class GetReviewRequest {
     private String content;
     private String regDate;
 
-    public int getReviewIdx() {
+    public long getReviewIdx() {
         return reviewIdx;
     }
 
-    public void setReviewIdx(int reviewIdx) {
+    public void setReviewIdx(long reviewIdx) {
         this.reviewIdx = reviewIdx;
     }
 
-    public int getUserIdx() {
+    public long getUserIdx() {
         return userIdx;
     }
 
-    public void setUserIdx(int userIdx) {
+    public void setUserIdx(long userIdx) {
         this.userIdx = userIdx;
     }
 
@@ -51,6 +56,38 @@ public class GetReviewRequest {
 
     public void setImg_path(String img_path) {
         this.img_path = img_path;
+    }
+
+    public String getImg_path1() {
+        return img_path1;
+    }
+
+    public void setImg_path1(String img_path1) {
+        this.img_path1 = img_path1;
+    }
+
+    public String getImg_path2() {
+        return img_path2;
+    }
+
+    public void setImg_path2(String img_path2) {
+        this.img_path2 = img_path2;
+    }
+
+    public String getImg_path3() {
+        return img_path3;
+    }
+
+    public void setImg_path3(String img_path3) {
+        this.img_path3 = img_path3;
+    }
+
+    public String getImg_path4() {
+        return img_path4;
+    }
+
+    public void setImg_path4(String img_path4) {
+        this.img_path4 = img_path4;
     }
 
     public String getBrand() {
@@ -109,11 +146,11 @@ public class GetReviewRequest {
         this.comments = comments;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

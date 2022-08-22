@@ -3,9 +3,7 @@ package umc.dosports.Review;
 import umc.dosports.Review.model.*;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 public class ReviewService {
 
@@ -15,49 +13,57 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    //게시글 생성
-    public int createReview(SetReviewRequest review) {
-        return reviewRepository.createReview(review);
+    //**********************************************게시글 조회 GET*****************************************************
+    public List<GetReviewRes> retrieveReviews(MainPageReviewRequest review){
+        return reviewRepository.showReviews(review);
     }
-
-
-    public List<GetReviewRequest> retrieveReviewsByFilter(String gender, String sports, Filter filter) {
-        List<Integer> indexes = reviewRepository.showReviews(gender, sports, filter);
-        List<GetReviewRequest> reviews = new LinkedList<>();
-        for(int i:indexes){
-            //System.out.println("checkPoint: "+i);
-            reviews.add(reviewRepository.showReviewByIdx(i));
-        }
-        return reviews;
+    public List<GetReviewRes> retrieveReviewsByFilter(String gender, String sports, GetReviewReq getReviewReq, boolean isPhoto, int sort_param, int pageNum) {
+        return reviewRepository.showReviewIdxByFilter(gender, sports, getReviewReq,isPhoto, sort_param, pageNum);
     }
-
-    public GetReviewRequest retrieveReviews(int reviewIdx) {
+    public List<GetReviewRes> retrieveUserReview(long userIdx, int pageNum){
+        return reviewRepository.showUserReview(userIdx, pageNum);
+    }
+    public GetReviewRes retrieveReviewsByIdx(long reviewIdx) {
+        reviewRepository.increaseHits(reviewIdx);
         return reviewRepository.showReviewByIdx(reviewIdx);
     }
 
-    public List<GetReviewRequest> retrieveUserReview(int userIdx){ return reviewRepository.showUserReview(userIdx);}
+    //**********************************************게시글 작성 POST*****************************************************
+    public int createReview(PostReviewReq review) {
+        return reviewRepository.createReview(review);
+    }
 
-    public String updateReview(int reviewIdx, String content){
-        int result = reviewRepository.updateReview(reviewIdx, content);
+    //**********************************************게시글 수정 PATCH*****************************************************
+    public String updateReview(long reviewIdx, String title, String content, long userIdxByJwt){
+        if(!reviewRepository.checkUserEquals(reviewIdx, userIdxByJwt)){
+            System.out.println("불일치");
+            return null;
+        }
+        int result = reviewRepository.updateReview(reviewIdx, title, content);
         if(result == 0){
             return "수정 실패";
         }
         return "수정 성공";
     }
 
-    public GetReviewRequest deleteReview(int reviewIdx) {
+    //**********************************************게시글 삭제 DELETE*****************************************************
+    public GetReviewRes deleteReview(long reviewIdx, long userIdxByJwt) {
         //받은 리뷰인덱스가 유효한지 확인
         if(!reviewRepository.checkReviewExists(reviewIdx)){
             return null;
         }
+        if(!reviewRepository.checkUserEquals(reviewIdx, userIdxByJwt)){
+            System.out.println("불일치");
+            return null;
+        }
 
         //해당 리뷰의 작성날짜와 현재 날짜를 비교
-        GetReviewRequest getReviewRequest = reviewRepository.showReviewByIdx(reviewIdx);
-        String[] regDate = getReviewRequest.getRegDate().split(" ")[0].split("-");
+        GetReviewRes getReviewRes = reviewRepository.showReviewByIdx(reviewIdx);
+        String[] regDate = getReviewRes.getRegDate().split(" ")[0].split("-");
         String[] curDate = LocalDate.now().toString().split("-");
         int reg = Integer.parseInt(regDate[0]+regDate[1]+regDate[2]);
         int cur = Integer.parseInt(curDate[0]+curDate[1]+curDate[2]);
-        if(cur-reg <= 100) return reviewRepository.deleteReview(getReviewRequest, reviewIdx);
+        if(cur-reg <= 100) return reviewRepository.deleteReview(getReviewRes, reviewIdx);
         else return null;
     }
 

@@ -2,9 +2,13 @@ package umc.dosports.Review.model;
 
 import java.util.*;
 
-public class ReviewForm {
-    private int userIdx;
-    private String userName;
+import lombok.*;
+
+@NoArgsConstructor
+@Getter
+@Setter
+public class PostReviewReq {
+    private long userIdx;
     private String brand;
     private String title;
     private String category;
@@ -19,20 +23,14 @@ public class ReviewForm {
     private String content;
     private List<String> img_path;
 
-    public int getUserIdx() {
+
+
+    public long getUserIdx() {
         return userIdx;
     }
 
-    public void setUserIdx(int userIdx) {
+    public void setUserIdx(long userIdx) {
         this.userIdx = userIdx;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getBrand() {
