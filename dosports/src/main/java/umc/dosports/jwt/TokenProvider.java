@@ -1,132 +1,79 @@
 package umc.dosports.jwt;
 
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
-import java.security.Key;
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.Collection;
+import umc.dosports.User.User;
 import java.util.Date;
-import java.util.stream.Collectors;
 
 public class TokenProvider {
-    private String issuer = "fresh";
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    private final String issuer = "dosports";
     private String secretKey = "";
     private String tokenPrefix = "Bearer";
+    // 액세스 토큰 유효시간 30분
+    private long accessTokenValidTime = 30 * 60 * 1000L;
+    // 리프레쉬 토큰 유효시간 15일
+    private long refreshTokenValidTime = 60 * 60 * 24 * 15 * 1000L;
 
-    public String makeJwtToken(Long userIdx) {
+    public String createAccessToken(Long userIdx) {
+        Claims claims = Jwts.claims().setSubject(String.valueOf(userIdx));
         Date now = new Date();
 
         return Jwts.builder()
-                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+                .setClaims(claims)
                 .setIssuer(issuer)
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + Duration.ofMinutes(30).toMillis()))
-                .claim("userIdx", userIdx)
+                .setExpiration(new Date(now.getTime() + accessTokenValidTime))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 
-    public Claims parsingToken(String authorizationHeader){
-        validationAuthorizationHeader(authorizationHeader);
-        String token = extractToken(authorizationHeader);
-        return Jwts.parser()
-                .setSigningKey(secretKey)
-                .parseClaimsJws(token)
-                .getBody();
+    public String createRefreshToken() {
+        Date now = new Date();
+
+        return Jwts.builder()
+                .setIssuer(issuer)
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime() + refreshTokenValidTime))
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
     }
 
-    private void validationAuthorizationHeader(String header) {
-        if (header == null || !header.startsWith(tokenPrefix)) {
-            throw new IllegalArgumentException();
+    // 토큰의 유효성 + 만료일자 확인
+    public boolean isValidToken(String accessToken) {
+        Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(accessToken);
+        return !claims.getBody().getExpiration().before(new Date());
+    }
+
+    // 토큰으로 사용자 인덱스 조회
+    public Long getUserIdx(String token) {
+        Long userIdx = Long.valueOf(Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject());
+        return userIdx;
+    }
+
+    // refresh Token 만료 체크 후 재발급
+    public Boolean reGenerateRefreshToken(User user) throws Exception {
+        String refreshToken = user.getRefreshToken();
+
+        if (refreshToken == null) {
+            log.info("refreshToken 정보가 존재하지 않습니다.");
+            return false;
+        }
+
+        try {
+            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(refreshToken.substring(7));
+            log.info("refresh token이 만료되지 않았습니다.");
+
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
-
-    private String extractToken(String authorizationHeader) {
-        return authorizationHeader.substring(tokenPrefix.length());
-    }
 }
-
-//@Component
-//public class TokenProvider implements InitializingBean {
-//
-//    private final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
-//
-//    private static final String AUTHORITIES_KEY = "auth";
-//
-//    private final String secret;
-//    private final long tokenValidityInMilliseconds;
-//
-//    private Key key;
-//
-//
-//    public TokenProvider(
-//            @Value("${jwt.secret}") String secret,
-//            @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
-//        this.secret = secret;
-//        this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
-//    }
-//
-//    @Override
-//    public void afterPropertiesSet() {
-//        byte[] keyBytes = Decoders.BASE64.decode(secret);
-//        this.key = Keys.hmacShaKeyFor(keyBytes);
-//    }
-//
-//    public String createToken(Authentication authentication) {
-//        String authorities = authentication.getAuthorities().stream()
-//                .map(GrantedAuthority::getAuthority)
-//                .collect(Collectors.joining(","));
-//
-//        long now = (new Date()).getTime();
-//        Date validity = new Date(now + this.tokenValidityInMilliseconds);
-//
-//        return Jwts.builder()
-//                .setSubject(authentication.getName())
-//                .claim(AUTHORITIES_KEY, authorities)
-//                .signWith(key, SignatureAlgorithm.HS512)
-//                .setExpiration(validity)
-//                .compact();
-//    }
-//
-//    public Authentication getAuthentication(String token) {
-//        Claims claims = Jwts
-//                .parserBuilder()
-//                .setSigningKey(key)
-//                .build()
-//                .parseClaimsJws(token)
-//                .getBody();
-//
-//        Collection<? extends GrantedAuthority> authorities =
-//                Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
-//                        .map(SimpleGrantedAuthority::new)
-//                        .collect(Collectors.toList());
-//
-//        User principal = new User(claims.getSubject(), "", authorities);
-//
-//        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
-//    }
-//
-//    public boolean validateToken(String token) {
-//        try {
-//            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-//            return true;
-//        } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-//            logger.info("잘못된 JWT 서명입니다.");
-//        } catch (ExpiredJwtException e) {
-//            logger.info("만료된 JWT 토큰입니다.");
-//        } catch (UnsupportedJwtException e) {
-//            logger.info("지원되지 않는 JWT 토큰입니다.");
-//        } catch (IllegalArgumentException e) {
-//            logger.info("JWT 토큰이 잘못되었습니다.");
-//        }
-//        return false;
-//    }
-//}
