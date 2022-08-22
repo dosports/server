@@ -12,8 +12,8 @@ public class TokenProvider {
     private final String issuer = "dosports";
     private String secretKey = "";
     private String tokenPrefix = "Bearer";
-    // 액세스 토큰 유효시간 30분
-    private long accessTokenValidTime = 30 * 60 * 1000L;
+    // 액세스 토큰 유효시간 60분
+    private long accessTokenValidTime = 60 * 60 * 1000L;
     // 리프레쉬 토큰 유효시간 15일
     private long refreshTokenValidTime = 60 * 60 * 24 * 15 * 1000L;
 
