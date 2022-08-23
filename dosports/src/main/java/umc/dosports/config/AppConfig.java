@@ -22,8 +22,11 @@ public class AppConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         logger.info(">>> 인터셉터 등록");
         registry.addInterceptor(bearerAuthInterceptor)
-//                .addPathPatterns("/like*")
-//                .addPathPatterns("/comment*")
+                .addPathPatterns("/notify")
+                .addPathPatterns("/like*")
+                .addPathPatterns("/comment")
+                .addPathPatterns("/comment/check/*")
+                .addPathPatterns("/comment/delete/*")
                 .addPathPatterns("/review/post")
                 .addPathPatterns("/review/update/*")
                 .addPathPatterns("/review/delete/*")
@@ -32,6 +35,7 @@ public class AppConfig implements WebMvcConfigurer {
                 .addPathPatterns("/user/delete")
                 .addPathPatterns("/user/name")
                 .addPathPatterns("/user/profileImg")
+                .addPathPatterns("/user/userIdx")
                 .addPathPatterns("/user/info");
     }
 }
