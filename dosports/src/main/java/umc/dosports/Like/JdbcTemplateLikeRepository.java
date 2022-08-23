@@ -20,11 +20,11 @@ public class JdbcTemplateLikeRepository implements LikeRepository{
     /*
     좋아요
      */
-    public int createLike(PostLikeReq form){
+    public int createLike(PostLikeReq form, long userIdxByJWT){
         String likeQuery = "INSERT INTO likeTable(reviewIdx, userIdx) VALUES(?, ?)";
         Object[] likeform = new Object[]{
                 form.getReviewIdx(),
-                form.getUserIdx()
+                userIdxByJWT
         };
         this.jdbcTemplate.update(likeQuery, likeform);
         String idxQuery = "SELECT last_insert_id()";
@@ -34,7 +34,7 @@ public class JdbcTemplateLikeRepository implements LikeRepository{
     public int increaseLike(PostLikeReq like){
         String countQuery = "SELECT likes FROM review WHERE reviewIdx = ?";
         int likes = this.jdbcTemplate.queryForObject(countQuery,
-                (rs, rowNum) -> rs.getInt("comments"),
+                (rs, rowNum) -> rs.getInt("likes"),
                 like.getReviewIdx());
         String updateQuery = "UPDATE review SET comments = ? WHERE reviewIdx = ?";
         Object[] comsNum = new Object[]{likes+1, like.getReviewIdx()};
@@ -70,7 +70,7 @@ public class JdbcTemplateLikeRepository implements LikeRepository{
     좋아요 체크
      */
     public boolean checkLike(long reviewIdx, long userIdxByJWT){
-        String checkQuery = "SELECT exists(SELECT likeIdx FROM like WHERE reviewIdx = ? AND userIdx = ?";
+        String checkQuery = "SELECT exists(SELECT likeIdx FROM likeTable WHERE reviewIdx = ? AND userIdx = ?)";
         Object[] check = new Object[]{
                 reviewIdx,
                 userIdxByJWT
@@ -102,10 +102,8 @@ public class JdbcTemplateLikeRepository implements LikeRepository{
         };
     }
     public int getEndPage(long userIdxByJWT){
-        String countQuery = "SELECT COUNT(likeIdx) FROM like WHERE userIdx = ?";
-        int total = jdbcTemplate.queryForObject(countQuery,
-                (rs, rowNum) -> rs.getInt("userIdx"),
-                userIdxByJWT);
+        String countQuery = "SELECT COUNT(likeIdx) FROM likeTable WHERE userIdx = ?";
+        int total = jdbcTemplate.queryForObject(countQuery, int.class, userIdxByJWT);
         return ((total - 1) / 10) + 1;
     }
 }
