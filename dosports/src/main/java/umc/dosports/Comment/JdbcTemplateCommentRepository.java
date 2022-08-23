@@ -72,7 +72,7 @@ public class JdbcTemplateCommentRepository implements CommentRepository{
             com.setParentIdx(rs.getLong("parentIdx"));
             com.setRegDate(rs.getString("regDate"));
             com.setName(rs.getString("name"));
-            com.setProfileImg(rs.getString("profileImg"));
+            com.setProfileImg(rs.getString("profileImgPath"));
             return com;
         };
     }
