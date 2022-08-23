@@ -6,6 +6,7 @@ import umc.dosports.Notification.model.DeleteNotiReq;
 import umc.dosports.Notification.model.GetNotiRes;
 
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.util.List;
 
 public class NotiDao implements NotiRepository{
@@ -19,7 +20,10 @@ public class NotiDao implements NotiRepository{
     알림 조회
      */
     public List<GetNotiRes> getNotis(long userIdxByJWT){
-        String notiQuery = "SELECT * FROM notify WHERE userIdx = ? AND isRead = ?";
+        String notiQuery = "SELECT n.*, c.content " +
+                "FROM notify AS n" +
+                "JOIN comment AS c ON c.commentIdx = n.contentIdx" +
+                "WHERE userIdx = ? AND isRead = ?";
         Object[] notiForm = new  Object[]{
                 userIdxByJWT,
                 0
@@ -34,6 +38,7 @@ public class NotiDao implements NotiRepository{
             noti.setReviewIdx(rs.getLong("reviewIdx"));
             noti.setNotiType(rs.getInt("notiType"));
             noti.setRegDate(rs.getString("regDate"));
+            noti.setContent(rs.getString("content"));
             return noti;
         };
     }
