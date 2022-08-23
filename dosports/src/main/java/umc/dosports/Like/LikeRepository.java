@@ -9,7 +9,7 @@ public interface LikeRepository {
     //좋아요
     int createLike(PostLikeReq likeReq);
     int increaseLike(PostLikeReq likeReq); //review table like+1
-    int notifyLike(PostLikeReq likeReq, long userIdxByJwt); //notify like
+    void notifyLike(PostLikeReq likeReq, long likeIdx); //notify like
 
     //좋아요 취소
     void deleteLike(PostLikeReq likeReq, long userIdxByJWT);

@@ -19,11 +19,7 @@ public class LikeController {
     @PostMapping("")
     @ResponseBody
     public Object createLike(PostLikeReq form){
-        //!!!!!Jwt수정 필요!!!!!
-        long userIdxByJwt = 1;
-        form.setUserIdx(userIdxByJwt);
-
-        long likeIdx = likeService.createLike(form, userIdxByJwt);
+        long likeIdx = likeService.createLike(form);
         Map<String, Long> result = new HashMap<>();
         result.put("likeIdx", likeIdx);
 

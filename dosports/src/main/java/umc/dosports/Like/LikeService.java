@@ -12,10 +12,10 @@ public class LikeService {
     }
 
     //좋아요
-    public long createLike(PostLikeReq likeReq, long userIdxByJWT){
+    public long createLike(PostLikeReq likeReq){
         long likeIdx = likeRepository.createLike(likeReq);
         likeRepository.increaseLike(likeReq); //review테이블 like+1
-        likeRepository.notifyLike(likeReq, userIdxByJWT); //notify like
+        likeRepository.notifyLike(likeReq, likeIdx); //notify like
         return likeIdx;
     }
 

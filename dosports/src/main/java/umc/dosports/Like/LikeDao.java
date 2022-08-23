@@ -38,13 +38,15 @@ public class LikeDao implements LikeRepository{
         return this.jdbcTemplate.update(updateQuery, comsNum);
     }
     //notify
-    public int notifyLike(PostLikeReq like, long userIdxByJWT){
-        String notifyQuery = "INSERT INTO notify (reviewIdx, userIdx, notifyType)" +
-                "VALUES(?, ?, ?)";
-        Object[] notify = new Object[]{like.getReviewIdx(), userIdxByJWT, 1};
+    public void notifyLike(PostLikeReq like, long likeIdx){
+        String findUserIdxQuery = "SELECT userIdx FROM review WHERE reviewIdx = ?";
+        long userIdx = this.jdbcTemplate.queryForObject(findUserIdxQuery,
+                (rs, rowNum) -> rs.getLong("userIdx"),
+                like.getReviewIdx());
+        String notifyQuery = "INSERT INTO notify (reviewIdx, userIdx, notifyType, contentIdx)" +
+                "VALUES(?, ?, ?, ?)";
+        Object[] notify = new Object[]{like.getReviewIdx(), userIdx, 1, likeIdx};
         this.jdbcTemplate.update(notifyQuery, notify);
-        String idxQuery = "SELECT last_inser_id()";
-        return this.jdbcTemplate.queryForObject(idxQuery, int.class);
     }
 
 
