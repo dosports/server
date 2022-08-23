@@ -67,7 +67,7 @@ public class UserForm {
         this.gender = gender;
     }
 
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 

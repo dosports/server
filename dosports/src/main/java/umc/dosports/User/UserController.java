@@ -38,12 +38,15 @@ public class UserController {
     //회원가입
     @PostMapping("/user/signUp")
     @ResponseBody
-    public Object join(UserForm form) throws UnsupportedEncodingException, MessagingException {
+    public Object join(UserForm form, @RequestPart("file") MultipartFile file) throws IOException, MessagingException {
         User user = new User();
         user.setEmail(form.getEmail());
         user.setPasswd(passwordEncoder.encode(form.getPasswd()));
         user.setName(form.getName());
         user.setGender(form.getGender());
+        user.setHeight(form.getHeight());
+        user.setWeight(form.getWeight());
+        user.setProfileImgPath(saveFile(file));
 
         long userIdx = userService.join(user);
         Map<String, Long> result = new HashMap<>();
@@ -59,7 +62,7 @@ public class UserController {
             throws Exception {
         userService.confirmEmail(email, mail_key);
 
-        return "home"; //이메일 인증 완료 페이지 주소를 리턴할 예정
+        return null; //이메일 인증 완료 페이지 주소를 리턴할 예정
     }
 
     /*비밀번호 리셋(비밀번호를 잊어버리셨나요?)*/
@@ -111,11 +114,28 @@ public class UserController {
                 refreshToken);
     }
 
-    //유저 마이페이지 정보 전달
+    //다른 유저 마이페이지 정보 전달
     @GetMapping("user/{userIdx}")
     @ResponseBody
     public Object findOneUser(@PathVariable(name = "userIdx") Long idx) {
         User user = userService.findOne(idx).get();
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("userIdx", user.getIdx());
+        result.put("name", user.getName());
+        result.put("email", user.getEmail());
+        result.put("gender", user.getGender());
+        result.put("height", user.getHeight());
+        result.put("weight", user.getWeight());
+        result.put("profileImgPath", user.getProfileImgPath());
+        return result;
+    }
+
+    //로그인 한 유저 마이페이지 정보 전달
+    @GetMapping("user/mypage")
+    @ResponseBody
+    public Object findOneUser(HttpServletRequest request) {
+        User user = userService.findOne(Long.parseLong(String.valueOf(request.getAttribute("userIdx")))).get();
 
         Map<String, Object> result = new HashMap<>();
         result.put("userIdx", user.getIdx());
@@ -135,11 +155,18 @@ public class UserController {
         return userService.deleteUser(Long.parseLong(String.valueOf(request.getAttribute("userIdx"))));
     }
 
-    //유저 로그인 시 이름 표시 api
+    //네비바 유저 로그인 시 이름 표시 api
     @GetMapping("/user/name")
     @ResponseBody
     public String getUserName(HttpServletRequest request) {
         return userService.findOne(Long.parseLong(String.valueOf(request.getAttribute("userIdx")))).get().getName();
+    }
+
+    //현재 로그인 한 유저의 userIdx 반환 api
+    @GetMapping("/user/userIdx")
+    @ResponseBody
+    public Long getLoginUserIdx(HttpServletRequest request) {
+        return userService.findOne(Long.parseLong(String.valueOf(request.getAttribute("userIdx")))).get().getIdx();
     }
 
     //유저 마이페이지 조회

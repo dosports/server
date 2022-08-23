@@ -1,12 +1,5 @@
 package umc.dosports.User;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import java.io.InputStream;
-import java.sql.Date;
-import java.util.Set;
-
 public class User {
     private long idx;
     private String name;
@@ -15,8 +8,8 @@ public class User {
     private String gender;
     private int height;
     private int weight;
-    private Date regDate;
-    private Date updateDate;
+    private String regDate;
+    private String updateDate;
     private String refreshToken;
     private String mail_key;
     private boolean mail_auth;
@@ -54,19 +47,19 @@ public class User {
         this.refreshToken = refreshToken;
     }
 
-    public Date getRegDate() {
+    public String getRegDate() {
         return regDate;
     }
 
-    public void setRegDate(Date regDate) {
+    public void setRegDate(String regDate) {
         this.regDate = regDate;
     }
 
-    public Date getUpdateDate() {
+    public String getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
     }
 

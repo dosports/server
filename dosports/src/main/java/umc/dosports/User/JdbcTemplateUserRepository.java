@@ -32,6 +32,7 @@ public class JdbcTemplateUserRepository implements UserRepository{
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    //회원가입
     @Override
     public Long save(User user) throws UnsupportedEncodingException, MessagingException {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
@@ -45,6 +46,9 @@ public class JdbcTemplateUserRepository implements UserRepository{
         String mail_key = tempKey.getKey(30, false);
         parameters.put("mail_key", mail_key);
         parameters.put("mail_auth", 0);
+        parameters.put("height", user.getHeight());
+        parameters.put("weight", user.getWeight());
+        parameters.put("profileImgPath", user.getProfileImgPath());
 
         //가입 인증 메일 발송 !!!추후 localhost 부분 도메인 명으로 변경해줘야 함!!!
         MailHandler sendMail = new MailHandler(mailSender);
@@ -256,6 +260,8 @@ public class JdbcTemplateUserRepository implements UserRepository{
             user.setMail_auth(rs.getBoolean("mail_auth"));
             user.setProfileImgPath(rs.getString("profileImgPath"));
             user.setRefreshToken(rs.getString("refreshToken"));
+            user.setRegDate(rs.getString("regDate"));
+            user.setUpdateDate(rs.getString("updateDate"));
             return user;
         };
     }
