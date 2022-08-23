@@ -42,13 +42,15 @@ public class CommentDao implements CommentRepository{
         return this.jdbcTemplate.update(updateQuery, comsNum);
     }
     //notify
-    public int notifyComment(PostCommentReq com, long userIdxByJWT){
-        String notifyQuery = "INSERT INTO notify (reviewIdx, userIdx, notifyType)" +
-                "VALUES(?, ?, ?)";
-        Object[] notify = new Object[]{com.getReviewIdx(), userIdxByJWT, 0};
+    public void notifyComment(PostCommentReq com, long commentIdx){
+        String findUserIdxQuery = "SELECT userIdx FROM review WHERE reviewIdx = ?";
+        long userIdx = this.jdbcTemplate.queryForObject(findUserIdxQuery,
+                (rs, rowNum) -> rs.getLong("userIdx"),
+                com.getReviewIdx());
+        String notifyQuery = "INSERT INTO notify (reviewIdx, userIdx, notifyType, contentIdx)" +
+                "VALUES(?, ?, ?, ?)";
+        Object[] notify = new Object[]{com.getReviewIdx(), userIdx, 0, commentIdx};
         this.jdbcTemplate.update(notifyQuery, notify);
-        String idxQuery = "SELECT last_inser_id()";
-        return this.jdbcTemplate.queryForObject(idxQuery, int.class);
     }
 
 

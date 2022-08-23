@@ -21,11 +21,7 @@ public class CommentConroller {
     @PostMapping("")
     @ResponseBody
     public Object createComment(PostCommentReq form){
-        //!!!!!Jwt수정 필요!!!!!
-        long userIdxByJwt = 1;
-        form.setUserIdx(userIdxByJwt);
-
-        long commentIdx = commentService.createComment(form, userIdxByJwt);
+        long commentIdx = commentService.createComment(form);
         Map<String, Long> result = new HashMap<>();
         result.put("commentIdx", commentIdx);
 

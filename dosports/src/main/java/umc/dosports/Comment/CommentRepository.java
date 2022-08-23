@@ -8,7 +8,7 @@ public interface CommentRepository {
     //댓글 작성
     int createComment(PostCommentReq commentReq);
     int increaseComment(PostCommentReq commentReq); //review table comment+1
-    int notifyComment(PostCommentReq commentReq, long userIdxByJWT); //notify comment
+    void notifyComment(PostCommentReq commentReq, long commentIdx); //notify comment
 
     //리뷰 댓글 조회
     List<GetCommentRes> commentsByreviewIdx(long reviewIdx);

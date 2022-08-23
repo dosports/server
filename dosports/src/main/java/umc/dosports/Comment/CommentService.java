@@ -12,10 +12,10 @@ public class CommentService {
     }
 
     //댓글 작성
-    public long createComment(PostCommentReq commentReq, long userIdxByJWT){
+    public long createComment(PostCommentReq commentReq){
         long commentIdx = commentRepository.createComment(commentReq);
         commentRepository.increaseComment(commentReq); //review 테이블 comment + 1
-        commentRepository.notifyComment(commentReq, userIdxByJWT); //notify comment
+        commentRepository.notifyComment(commentReq, commentIdx); //notify comment
         return commentIdx;
     }
 
