@@ -58,10 +58,8 @@ public class JdbcTemplateCommentRepository implements CommentRepository{
     리뷰 댓굴 조회
      */
     public List<GetCommentRes> commentsByreviewIdx(long reviewIdx){
-        String comQuery = "SELECT c.*, u.name, u.profileImg" +
-                "FROM comment AS c" +
-                "JOIN user AS a ON c.userIdx = u.userIdx" +
-                "WHERE c.reviewIdx = ?";
+        String comQuery = "SELECT c.*, u.name, u.profileImgPath FROM comment AS c " +
+                "JOIN user AS u ON u.userIdx = c.userIdx WHERE c.reviewIdx = ?";
         return jdbcTemplate.query(comQuery, this.commentRowMapper(), reviewIdx);
     }
     private RowMapper<GetCommentRes> commentRowMapper(){
