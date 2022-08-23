@@ -8,10 +8,10 @@ import umc.dosports.Comment.model.PostCommentReq;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class CommentDao implements CommentRepository{
+public class JdbcTemplateCommentRepository implements CommentRepository{
     private final JdbcTemplate jdbcTemplate;
 
-    public CommentDao(DataSource dataSource){
+    public JdbcTemplateCommentRepository(DataSource dataSource){
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
