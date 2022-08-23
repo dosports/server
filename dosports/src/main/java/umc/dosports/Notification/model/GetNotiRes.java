@@ -6,6 +6,7 @@ public class GetNotiRes {
     private long reviewIdx;
     private int notiType;
     private String regDate;
+    private String content;
 
     public long getNotiIdx() {
         return notiIdx;
@@ -43,7 +44,9 @@ public class GetNotiRes {
         return regDate;
     }
 
-    public void setRegDate(String regDate) {
-        this.regDate = regDate;
-    }
+    public void setRegDate(String regDate) { this.regDate = regDate; }
+
+    public String getContent() { return content; }
+
+    public void setContent(String content) { this.content = content; }
 }
