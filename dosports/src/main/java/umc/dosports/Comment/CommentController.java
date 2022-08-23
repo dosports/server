@@ -9,7 +9,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping("/comment")
-public class CommentConroller {
+public class CommentController {
     private final CommentService commentService;
 
     @Autowired
