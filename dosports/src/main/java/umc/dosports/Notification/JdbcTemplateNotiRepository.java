@@ -9,10 +9,10 @@ import javax.sql.DataSource;
 import javax.xml.crypto.Data;
 import java.util.List;
 
-public class NotiDao implements NotiRepository{
+public class JdbcTemplateNotiRepository implements NotiRepository{
     private final JdbcTemplate jdbcTemplate;
 
-    public NotiDao(DataSource dataSource){
+    public JdbcTemplateNotiRepository(DataSource dataSource){
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
