@@ -34,7 +34,6 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         logger.info(">>> interceptor.preHandle 호출");
         String token = authorizationExtractor.extract(request, "Bearer");
-        logger.info("토큰값: " + token);
         //우리는 토큰 비어 있어도 모든 페이지 접근 가능하기 때문에 token.isEmpty() 검증할 필요 없겠지?
 //        if (token.isEmpty()) {
 //            return true;
