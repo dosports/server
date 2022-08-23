@@ -47,7 +47,7 @@ public class CommentDao implements CommentRepository{
         long userIdx = this.jdbcTemplate.queryForObject(findUserIdxQuery,
                 (rs, rowNum) -> rs.getLong("userIdx"),
                 com.getReviewIdx());
-        String notifyQuery = "INSERT INTO notify (reviewIdx, userIdx, notifyType, contentIdx)" +
+        String notifyQuery = "INSERT INTO notification (reviewIdx, userIdx, notiType, contentIdx)" +
                 "VALUES(?, ?, ?, ?)";
         Object[] notify = new Object[]{com.getReviewIdx(), userIdx, 0, commentIdx};
         this.jdbcTemplate.update(notifyQuery, notify);
