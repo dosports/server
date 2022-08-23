@@ -50,7 +50,7 @@ public class LikeController {
     //좋아요 리뷰 목록
     @GetMapping("/{pageNum}")
     @ResponseBody
-    public List<GetReviewRes> getLikeReview(@PathVariable("pageNum") int pageNum){
+    public GetReviewRes getLikeReview(@PathVariable("pageNum") int pageNum){
         //!!!!!Jwt수정 필요!!!!!
         long userIdxByJwt = 1;
 

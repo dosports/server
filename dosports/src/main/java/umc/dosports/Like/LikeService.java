@@ -31,7 +31,14 @@ public class LikeService {
         return likeRepository.checkLike(reviewIdx, userIdxByJWT);
     }
 
-    public List<GetReviewRes> getLikeReview(long userIdxByJWT, int pageNum){
-        return likeRepository.getLikeReview(userIdxByJWT, pageNum);
+    //좋아요 리뷰 목록
+    public GetReviewRes getLikeReview(long userIdxByJWT, int pageNum){
+        //reviews
+        List<Long> list = likeRepository.getLikeReviews(userIdxByJWT, pageNum);
+        //endPage
+        int endPage = likeRepository.getEndPage(userIdxByJWT);
+        GetReviewRes getReviewRes = new GetReviewRes(list, endPage);
+
+        return getReviewRes;
     }
 }

@@ -1,11 +1,14 @@
 package umc.dosports.Like;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import umc.dosports.Like.model.GetReviewIdxRes;
 import umc.dosports.Like.model.GetReviewRes;
 import umc.dosports.Like.model.PostLikeReq;
 
 import javax.sql.DataSource;
+import java.util.*;
 
 public class LikeDao implements LikeRepository{
     private final JdbcTemplate jdbcTemplate;
@@ -18,7 +21,7 @@ public class LikeDao implements LikeRepository{
     좋아요
      */
     public int createLike(PostLikeReq form){
-        String likeQuery = "INSERT INTO like(reviewIdx, userIdx) VALUES(?, ?)";
+        String likeQuery = "INSERT INTO likeTable(reviewIdx, userIdx) VALUES(?, ?)";
         Object[] likeform = new Object[]{
                 form.getReviewIdx(),
                 form.getUserIdx()
@@ -43,7 +46,7 @@ public class LikeDao implements LikeRepository{
         long userIdx = this.jdbcTemplate.queryForObject(findUserIdxQuery,
                 (rs, rowNum) -> rs.getLong("userIdx"),
                 like.getReviewIdx());
-        String notifyQuery = "INSERT INTO notify (reviewIdx, userIdx, notifyType, contentIdx)" +
+        String notifyQuery = "INSERT INTO notification (reviewIdx, userIdx, notiType, contentIdx)" +
                 "VALUES(?, ?, ?, ?)";
         Object[] notify = new Object[]{like.getReviewIdx(), userIdx, 1, likeIdx};
         this.jdbcTemplate.update(notifyQuery, notify);
@@ -54,7 +57,7 @@ public class LikeDao implements LikeRepository{
     좋아요 취소
      */
     public void deleteLike(PostLikeReq like, long userIdxByJWT){
-        String deleteQuery = "DELETE FROM like WHERE reviewIdx = ? AND userIdx = ?";
+        String deleteQuery = "DELETE FROM likeTable WHERE reviewIdx = ? AND userIdx = ?";
         Object[] likeForm = new Object[]{
                 like.getReviewIdx(),
                 userIdxByJWT
@@ -79,43 +82,30 @@ public class LikeDao implements LikeRepository{
     /*
     좋아요 리뷰 목록
      */
-    public List<GetReviewRes> getLikeReview(long userIdxByJWT, int pageNum){
-        String likeQuery = "SELECT * FROM r.* FROM review as r "+
-                "JOIN like AS l ON l.reviewIdx = r.reviewIdx " +
-                "WHERE l.userIdx = ?)";
+    public List<Long> getLikeReviews(long userIdxByJWT, int pageNum){
+        String likeQuery = "SELECT p.pagingIdx, p.reviewIdx FROM " +
+                "(SELECT l.*, ROW_NUMBER() OVER(ORDER BY l.likeIdx DESC) AS pagingIdx " +
+                "FROM likeTable AS l WHERE userIdx = ?) AS p " +
+                "WHERE p.pagingIdx BETWEEN (10 * (?) + 1) AND (10 * (?)); ";
         Object[] likeForm = new Object[]{
                 userIdxByJWT,
+                pageNum - 1,
                 pageNum
         };
-        return jdbcTemplate.query(likeQuery, this.likeReviewRowMapper(), likeForm);
+        return jdbcTemplate.query(likeQuery, this.likeReviewsRowMapper(), likeForm);
     }
-    private RowMapper<GetReviewRes> likeReviewRowMapper() {
+    private RowMapper<Long> likeReviewsRowMapper() {
         return (rs, rowNum) -> {
-            GetReviewRes review = new GetReviewRes();
-            review.setReviewIdx(rs.getInt("reviewIdx"));
-            review.setUserIdx(rs.getInt("userIdx"));
-            review.setName(rs.getString("name"));
-            review.setImg_path(rs.getString("img_path"));
-            review.setImg_path1(rs.getString("img_path1"));
-            review.setImg_path2(rs.getString("img_path2"));
-            review.setImg_path3(rs.getString("img_path3"));
-            review.setImg_path4(rs.getString("img_path4"));
-            review.setBrand(rs.getString("brand"));
-            review.setTitle(rs.getString("title"));
-            review.setCategory(rs.getString("category"));
-            review.setSports(rs.getString("sports"));
-            review.setRate(rs.getInt("rate"));
-            review.setLikes(rs.getInt("likes"));
-            review.setComments(rs.getInt("comments"));
-            review.setGender(rs.getString("gender"));
-            review.setHeight(rs.getInt("height"));
-            review.setWeight(rs.getInt("weight"));
-            review.setLevel(rs.getInt("level"));
-            review.setSource(rs.getString("source"));
-            review.setPrice(rs.getInt("price"));
-            review.setContent(rs.getString("content"));
-            review.setRegDate(rs.getString("regDate"));
-            return review;
+            Long reviewIdx;
+            reviewIdx = rs.getLong("reviewIdx");
+            return reviewIdx;
         };
+    }
+    public int getEndPage(long userIdxByJWT){
+        String countQuery = "SELECT COUNT(likeIdx) FROM like WHERE userIdx = ?";
+        int total = jdbcTemplate.queryForObject(countQuery,
+                (rs, rowNum) -> rs.getInt("userIdx"),
+                userIdxByJWT);
+        return ((total - 1) / 10) + 1;
     }
 }

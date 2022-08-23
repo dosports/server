@@ -18,5 +18,6 @@ public interface LikeRepository {
     public boolean checkLike(long reviewIdx, long userIdxByJWT);
 
     //좋아요 리뷰 목록
-    public List<GetReviewRes> getLikeReview(long userIdxByJWT, int pageNum);
+    public List<Long> getLikeReviews(long userIdxByJWT, int pageNum);
+    public int getEndPage(long userIdxByJWT);
 }
