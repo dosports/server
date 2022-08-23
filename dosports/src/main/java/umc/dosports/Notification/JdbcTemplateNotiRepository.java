@@ -21,11 +21,12 @@ public class JdbcTemplateNotiRepository implements NotiRepository{
      */
     public List<GetNotiRes> getNotis(long userIdxByJWT){
         String notiQuery = "SELECT n.*, c.content " +
-                "FROM notify AS n" +
-                "JOIN comment AS c ON c.commentIdx = n.contentIdx" +
-                "WHERE userIdx = ? AND isRead = ?";
+                "FROM notification AS n " +
+                "JOIN comment AS c ON c.commentIdx = n.contentIdx " +
+                "WHERE n.userIdx = ? AND n.isRead = ? AND n.notiType = ?";
         Object[] notiForm = new  Object[]{
                 userIdxByJWT,
+                0,
                 0
         };
         return jdbcTemplate.query(notiQuery, this.notiRowMapper(), notiForm);
@@ -48,7 +49,7 @@ public class JdbcTemplateNotiRepository implements NotiRepository{
     알림 읽음
      */
     public void patchNoti(long notiIdx){
-        String patchQuery = "UPDATE notify SET isRead = ?";
+        String patchQuery = "UPDATE notification SET isRead = ?";
         this.jdbcTemplate.update(patchQuery, notiIdx);
     }
 
@@ -57,8 +58,9 @@ public class JdbcTemplateNotiRepository implements NotiRepository{
     알림 삭제
      */
     public void deleteNoti(DeleteNotiReq form){
-        String deleteQuery = "DELETE FROM notify WHERE notifyIdx = ?";
+        String deleteQuery = "DELETE FROM notification WHERE notifyIdx = ?";
         this.jdbcTemplate.update(deleteQuery, form.getNotiIdx());
     }
 
 }
+
