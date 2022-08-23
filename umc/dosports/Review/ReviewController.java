@@ -58,6 +58,12 @@ public class ReviewController {
         return reviewService.retrieveUserReview(userIdx, Integer.parseInt((String)page_num));
     }
 
+    @GetMapping("/user/info/{userIdx}")
+    @ResponseBody
+    public GetReviewUserInfoRes getUserInfo(@PathVariable(name="userIdx") long userIdx){
+        return reviewService.retrieveUserInfo(userIdx);
+    }
+
     @PostMapping("/post")
     @ResponseBody
     public Object createReview(PostReviewReq form, @RequestParam(required=false) List<MultipartFile>  file) throws IOException {

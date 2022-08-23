@@ -13,6 +13,7 @@ public interface ReviewRepository {
     List<GetReviewRes> showReviewIdxByFilter(String gender, String sports, GetReviewReq getReviewReq, boolean isPhoto, int sort_param, int page_num);
     List<GetReviewRes> showUserReview(long userIdx, int page_num);
     GetReviewRes showReviewByIdx(long reviewIdx);
+    GetReviewUserInfoRes showUserInfo(long userIdx);
     int increaseHits(long reviewIdx);
 
     //**********************************************게시글 생성 POST*****************************************************

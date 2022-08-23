@@ -1,6 +1,7 @@
 package umc.dosports.Review.model;
 
-
+import lombok.*;
+@NoArgsConstructor
 public class GetReviewRes {
     private long reviewIdx;
     private long userIdx;

@@ -1,6 +1,7 @@
 package umc.dosports.Review.model;
 
-
+import lombok.*;
+@NoArgsConstructor
 public class GetReviewReq {
     private Object category;
     private Object height;
@@ -20,7 +21,7 @@ public class GetReviewReq {
         this.min_price = min_price;
     }
     public String getCategory() {
-        if(this.category == null) return "";
+        if(this.category == null) return "-1";
         return category.toString();
     }
     public int getMax_price() {

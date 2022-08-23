@@ -1,5 +1,6 @@
 package umc.dosports.Review;
 
+import org.hibernate.dialect.JDataStoreDialect;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import umc.dosports.Review.model.*;
@@ -29,8 +30,8 @@ public class JdbcTemplateReviewRepository implements ReviewRepository{
     public List<GetReviewRes> showReviewIdxByFilter(String gender, String sports, GetReviewReq getReviewReq, boolean isPhoto, int sort_param, int page_num){   //category의 저장방식 수정!! 문자열로 변환시 오류 발생
         String findQuery = "select * from ( select ROW_NUMBER() OVER("+sortString(sort_param)+") as rownum, r.* ,u.name "+
                 "from review as r join user as u on r.userIdx = u.userIdx where r.gender = ? and r.sports = ? " +
-                ((!getReviewReq.getCategory().equals(""))?"and r.category = ? ":"and ? ")+
-                ((getReviewReq.getHeight() == -1)?"and r.height between ? and ? ":"and ? and ? ")+
+                ((!getReviewReq.getCategory().equals("-1"))?"and r.category = ? ":"and ? ")+
+                ((getReviewReq.getHeight() != -1)?"and r.height between ? and ? ":"and ? and ? ")+
                 ((getReviewReq.getWeight() != -1)?"and r.weight between ? and ? ":"and ? and ? ")+
                 ((getReviewReq.getLevel() != -1)?"and r.level = ? ":"and ? ")+
                 ((getReviewReq.getMin_price() != -1 && getReviewReq.getMax_price() != -1)?"and r.price between ? and ? ":
@@ -65,6 +66,17 @@ public class JdbcTemplateReviewRepository implements ReviewRepository{
                 "group by r.reviewIdx";
         long findQueryParam = idx;
         return jdbcTemplate.queryForObject(findQuery, this.reviewRowMapper(), findQueryParam);
+    }
+
+    public GetReviewUserInfoRes showUserInfo(long userIdx){
+        String findQuery = "select u.userIdx, u.gender, u.height, u.weight "+
+                "from user as u where u.userIdx = ?";
+        return jdbcTemplate.queryForObject(findQuery, (rs, rowNum)-> new GetReviewUserInfoRes(
+                rs.getLong("userIdx"),
+                rs.getString("gender"),
+                rs.getInt("height"),
+                rs.getInt("weight")
+        ), userIdx);
     }
 
     public int increaseHits(long reviewIdx){

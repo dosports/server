@@ -28,6 +28,10 @@ public class ReviewService {
         return reviewRepository.showReviewByIdx(reviewIdx);
     }
 
+    public GetReviewUserInfoRes retrieveUserInfo(long userIdx){
+        return reviewRepository.showUserInfo(userIdx);
+    }
+
     //**********************************************게시글 작성 POST*****************************************************
     public int createReview(PostReviewReq review) {
         return reviewRepository.createReview(review);
