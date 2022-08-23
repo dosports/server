@@ -10,10 +10,10 @@ import umc.dosports.Like.model.PostLikeReq;
 import javax.sql.DataSource;
 import java.util.*;
 
-public class LikeDao implements LikeRepository{
+public class JdbcTemplateLikeRepository implements LikeRepository{
     private final JdbcTemplate jdbcTemplate;
 
-    public LikeDao(DataSource dataSource){
+    public JdbcTemplateLikeRepository(DataSource dataSource){
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
